@@ -230,21 +230,21 @@ export default function App() {
             <div className="max-w-2xl">
               <div className="flex items-center gap-3 mb-4">
                 <div className="h-px w-8 bg-blue-900"></div>
-                <h3 className="text-blue-900 font-bold uppercase tracking-widest text-sm">Divisions & Expertise</h3>
+                <h3 className="text-blue-900 font-bold uppercase tracking-widest text-sm">Bölümler & Uzmanlık</h3>
               </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-blue-950 tracking-tight">Comprehensive Capabilities</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-blue-950 tracking-tight">Kapsamlı Uzmanlığımız</h2>
             </div>
             <p className="text-gray-600 max-w-md font-medium border-l-2 border-blue-900 pl-4">
-              We leverage deep industry expertise to execute multi-disciplinary construction programs across varying industrial sectors.
+              Sektördeki derin uzmanlığımızdan yararlanarak, çeşitli endüstriyel sektörlerde çok disiplinli inşaat programları yürütüyoruz.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: Building2, title: 'Commercial Development', desc: 'High-rise office buildings, retail hubs, and corporate headquarters built to exacting specifications.' },
-              { icon: Ruler, title: 'Architectural Engineering', desc: 'Integrated design and structural engineering ensuring both aesthetic impact and physical resilience.' },
-              { icon: HardHat, title: 'Project Management', desc: 'Rigorous oversight and risk mitigation for complex, multi-phase construction initiatives.' },
-              { icon: Hammer, title: 'Infrastructure Works', desc: 'Heavy civil engineering and infrastructure projects supporting broad urban development.' }
+              { icon: Building2, title: 'Modern ve Fonksiyonel Mimari Vizyon', desc: 'Sadece binalar inşa etmiyor; modern zarafetin fonksiyonellikle buluştuğu, bulunduğu çevreye değer katan prestijli yaşam alanları yaratıyoruz.' },
+              { icon: Ruler, title: 'Kusursuz Mühendislik ve İnce İşçilik', desc: 'Statik güvenlikten en ince dekorasyon detaylarına kadar, alanında uzman ekiplerle çalışarak vizyonu hatasız bir gerçeğe dönüştürüyoruz. Detaylara verdiğimiz önem, kalitemizin imzasıdır.' },
+              { icon: HardHat, title: 'Sıfır Hata Odaklı Proje Yönetimi', desc: 'Süreçleri mutlak şeffaflıkla yönetiyor, planlama aşamasından proje teslimine kadar her adımı titizlikle denetleyerek kalite standardımızdan asla ödün vermiyoruz.' },
+              { icon: Hammer, title: 'Tavizsiz İşçilik', desc: 'Projelerimizin her metrekaresinde, estetiği ve sarsılmaz dayanıklılığı garanti eden birinci sınıf, endüstri standartlarının üzerindeki malzemeleri tercih ediyoruz.' }
             ].map((service, idx) => (
               <div key={idx} className="bg-white p-8 border border-gray-200 hover:border-blue-900 transition-colors group">
                 <service.icon className="h-10 w-10 text-blue-900 mb-6 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
@@ -293,19 +293,6 @@ export default function App() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="bg-gray-100 py-16 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-blue-950 mb-2 tracking-tight">Commence Your Corporate Development.</h2>
-            <p className="text-gray-600 font-medium">Partner with Çobantaş to engineer structural excellence.</p>
-          </div>
-          <a href="#contact" className="bg-blue-950 hover:bg-blue-900 text-white px-8 py-4 font-bold text-sm uppercase tracking-widest transition-colors flex-shrink-0">
-            Schedule a Consultation
-          </a>
         </div>
       </section>
 
