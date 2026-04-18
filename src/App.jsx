@@ -69,7 +69,7 @@ export default function App() {
             {/* Logo */}
             <a href="#home" className="flex items-center gap-3 group">
               {/* Kendi logonuz public klasöründeki logo.png dosyasından buraya gelecektir */}
-              <img src="/çobantaşLogo.jpeg" alt="Çobantaş Logo" className="h-10 w-auto object-contain" />
+              <img src="/çobantaşLogo.jpeg" alt="Cobantaş Logo" className="h-10 w-auto object-contain" />
               
               {/* NOT: Eğer logonuzun içinde ÇOBANTAŞ yazısı zaten varsa, aşağıdaki <div className="flex flex-col">...</div> bloğunu silebilirsiniz */}
               <div className="flex flex-col">
