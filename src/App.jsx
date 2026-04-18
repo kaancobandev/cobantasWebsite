@@ -196,21 +196,21 @@ export default function App() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="h-px w-8 bg-blue-900"></div>
-                <h3 className="text-blue-900 font-bold uppercase tracking-widest text-sm">Firm Profile</h3>
+                <h3 className="text-blue-900 font-bold uppercase tracking-widest text-sm">Şirket Profili</h3>
               </div>
               <h2 className="text-3xl md:text-4xl font-extrabold text-blue-950 mb-6 leading-tight tracking-tight">
-                Defining the Standards of Corporate Construction.
+                Şirketimizin Yapısal Standartları
               </h2>
               <p className="text-gray-600 text-lg mb-8 leading-relaxed">
-                Since 1998, Çobantaş has operated at the intersection of architectural vision and rigorous engineering. We do not merely build structures; we establish the physical assets that drive our clients' corporate success.
+                Çobantaş, mimari vizyon ve titiz mühendisliğin kesiştiği noktada faaliyet göstermektedir. Biz sadece yapılar inşa etmiyoruz; müşterilerimizin kurumsal başarısını yönlendiren fiziksel varlıkları oluşturuyoruz.
               </p>
               
               <div className="grid sm:grid-cols-2 gap-6 mb-10">
                 {[
-                  'Uncompromising Safety Protocols',
-                  'Advanced Structural Engineering',
-                  'Strict Budget & Timeline Adherence',
-                  'Sustainable Corporate Practices'
+                  'Tavizsiz İş Güvenliği',
+                  'Gelişmiş Yapısal Mühendislik',
+                  'Zaman Çizelgesine Sıkı Uyum',
+                  'Sürdülebilir ve Çevre Dostu Uygulamalar'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3">
                     <CheckCircle2 className="h-5 w-5 text-blue-800 flex-shrink-0 mt-0.5" />
@@ -305,19 +305,19 @@ export default function App() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="h-px w-8 bg-blue-900"></div>
-                <h3 className="text-blue-900 font-bold uppercase tracking-widest text-sm">Direct Contact</h3>
+                <h3 className="text-blue-900 font-bold uppercase tracking-widest text-sm">İletişim</h3>
               </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-blue-950 mb-8 tracking-tight">Connect with Our Firm</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-blue-950 mb-8 tracking-tight">Bizimle İletişime Geçin</h2>
               <p className="text-gray-600 text-lg mb-12">
-                Require specialized engineering consultation or project management services? Direct your inquiry to our corporate team for an immediate response.
+                Uzmanlaşmış mühendislik danışmanlığı veya proje yönetimi hizmetlerine mi ihtiyacınız var? Anında yanıt almak için lütfen talebinizi kurumsal ekibimize iletin.
               </p>
 
               <div className="space-y-8">
                 <div className="flex items-start gap-4">
                   <MapPin className="h-6 w-6 text-blue-900 flex-shrink-0 mt-1" strokeWidth={1.5} />
                   <div>
-                    <h4 className="text-sm font-bold uppercase tracking-widest text-blue-950 mb-1">Corporate Headquarters</h4>
-                    <p className="text-gray-600">Levent, Büyükdere Cd.,<br/>34330 Beşiktaş/İstanbul, Türkiye</p>
+                    <h4 className="text-sm font-bold uppercase tracking-widest text-blue-950 mb-1">Adresimiz</h4>
+                    <p className="text-gray-600">Atatürk Mah. Komsan Üstü Yolu Cad.<br/>Residance Quality No:4 İç Kapı No:211 Küçükçekmece / İSTANBUL</p>
                   </div>
                 </div>
 
@@ -325,8 +325,7 @@ export default function App() {
                   <Phone className="h-6 w-6 text-blue-900 flex-shrink-0 mt-1" strokeWidth={1.5} />
                   <div>
                     <h4 className="text-sm font-bold uppercase tracking-widest text-blue-950 mb-1">Direct Lines</h4>
-                    <p className="text-gray-600">+90 (212) 555 0123</p>
-                    <p className="text-gray-600">+90 (532) 555 0124</p>
+                    <p className="text-gray-600">+90 (532) 524 41 93</p>
                   </div>
                 </div>
 
@@ -334,8 +333,7 @@ export default function App() {
                   <Mail className="h-6 w-6 text-blue-900 flex-shrink-0 mt-1" strokeWidth={1.5} />
                   <div>
                     <h4 className="text-sm font-bold uppercase tracking-widest text-blue-950 mb-1">Digital Correspondence</h4>
-                    <p className="text-gray-600">info@cobantas.com.tr</p>
-                    <p className="text-gray-600">corporate@cobantas.com.tr</p>
+                    <p className="text-gray-600">info@cobantas.com</p>
                   </div>
                 </div>
               </div>
@@ -343,28 +341,28 @@ export default function App() {
 
             {/* Contact Form */}
             <div className="bg-gray-50 p-8 border border-gray-200">
-              <h3 className="text-xl font-extrabold text-blue-950 mb-6 tracking-tight">Submit an Inquiry</h3>
+              <h3 className="text-xl font-extrabold text-blue-950 mb-6 tracking-tight">Bir talep gönderin</h3>
               <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-widest text-gray-700 mb-2">First Name</label>
+                    <label className="block text-xs font-bold uppercase tracking-widest text-gray-700 mb-2">Ad</label>
                     <input type="text" className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-blue-900 transition-colors bg-white" />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-widest text-gray-700 mb-2">Last Name</label>
+                    <label className="block text-xs font-bold uppercase tracking-widest text-gray-700 mb-2">Soyad</label>
                     <input type="text" className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-blue-900 transition-colors bg-white" />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-700 mb-2">Corporate Email</label>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-700 mb-2">Kurumsal Email</label>
                   <input type="email" className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-blue-900 transition-colors bg-white" />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-700 mb-2">Project Specifications</label>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-700 mb-2">Açıklama</label>
                   <textarea rows="4" className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-blue-900 transition-colors bg-white"></textarea>
                 </div>
                 <button type="submit" className="w-full bg-blue-950 hover:bg-blue-900 text-white font-bold text-sm uppercase tracking-widest py-4 transition-colors">
-                  Transmit Inquiry
+                    Talep Gönder
                 </button>
               </form>
             </div>
