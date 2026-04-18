@@ -92,12 +92,6 @@ export default function App() {
                   {link.name}
                 </a>
               ))}
-              <a 
-                href="#contact"
-                className="bg-blue-950 hover:bg-blue-900 text-white px-7 py-3 text-sm font-bold uppercase tracking-widest transition-colors"
-              >
-                Initiate Inquiry
-              </a>
             </div>
 
             {/* Mobile Menu Button */}
@@ -126,13 +120,6 @@ export default function App() {
                   {link.name}
                 </a>
               ))}
-              <a
-                href="#contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block mt-4 px-3 py-4 text-sm font-bold uppercase tracking-widest text-white bg-blue-900 text-center"
-              >
-                Initiate Inquiry
-              </a>
             </div>
           </div>
         )}
