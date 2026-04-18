@@ -276,8 +276,8 @@ export default function App() {
               { img: './flamingo.jpg', title: 'Flamingo Alkent', category: 'Konut' },
               { img: './lotus istanbul son hal.jpg', title: 'Lotus İstanbul', category: 'Konut' },
               { img: './bahce-bahcesehir.jpg', title: 'Bahçe Bahçeşehir', category: 'Konut' },
-              { img: './panorama silivri.jpg', title: 'Panorama Bulvar Silivri', category: 'Konut' },
-              { img: './pinnacle', title: 'Pinnacle', category: 'Konut' }
+              { img: './panorama silivri.png', title: 'Panorama Bulvar Silivri', category: 'Konut' },
+              { img: './pinnacle.jpg', title: 'Pinnacle', category: 'Konut' }
             ].map((project, idx) => (
               <div key={idx} className="group relative aspect-square overflow-hidden bg-blue-900 cursor-pointer">
                 <img 
