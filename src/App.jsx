@@ -387,7 +387,7 @@ export default function App() {
                 </span>
               </div>
               <p className="text-sm mb-6 leading-relaxed">
-                Engineering the foundations of tomorrow with uncompromising structural integrity and corporate innovation.
+                Tavizsiz yapısal bütünlük ve kurumsal yenilikçilikle yarının temellerini inşa ediyoruz.
               </p>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-500 hover:text-white transition-colors"><FacebookIcon className="h-5 w-5" /></a>
@@ -399,9 +399,9 @@ export default function App() {
 
             {/* Links */}
             <div>
-              <h4 className="text-white text-sm font-bold uppercase tracking-widest mb-6">Firm Profile</h4>
+              <h4 className="text-white text-sm font-bold uppercase tracking-widest mb-6">Şirket Profili</h4>
               <ul className="space-y-3 text-sm">
-                {['Corporate Governance', 'Our Divisions', 'Selected Works', 'Careers', 'Direct Contact'].map((link) => (
+                {['Hakkımızda', 'Vizyon & Misyon','Devam Eden Projeler', 'Biten Projeler'].map((link) => (
                   <li key={link}>
                     <a href="#" className="hover:text-blue-400 transition-colors flex items-center gap-2">
                       <ChevronRight className="h-3 w-3 text-blue-600" />
@@ -414,9 +414,9 @@ export default function App() {
 
             {/* Divisions */}
             <div>
-              <h4 className="text-white text-sm font-bold uppercase tracking-widest mb-6">Divisions</h4>
+              <h4 className="text-white text-sm font-bold uppercase tracking-widest mb-6">Hizmetlerimiz</h4>
               <ul className="space-y-3 text-sm">
-                {['Commercial Building', 'Residential Dev', 'Civil Infrastructure', 'Architectural Design', 'Project Mgmt'].map((link) => (
+                {['Gizlilik Politikası','Kişisel Verilerin Korunması', 'Kullanım Koşulları'].map((link) => (
                   <li key={link}>
                     <a href="#" className="hover:text-blue-400 transition-colors flex items-center gap-2">
                       <ChevronRight className="h-3 w-3 text-blue-600" />
@@ -429,7 +429,7 @@ export default function App() {
 
             {/* Newsletter */}
             <div>
-              <h4 className="text-white text-sm font-bold uppercase tracking-widest mb-6">Newsletter</h4>
+              <h4 className="text-white text-sm font-bold uppercase tracking-widest mb-6">Haberler</h4>
               <p className="text-sm mb-4">Subscribe to receive firm updates and industry insights.</p>
               <form className="flex flex-col space-y-3" onSubmit={(e) => e.preventDefault()}>
                 <input 
