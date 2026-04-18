@@ -149,7 +149,7 @@ export default function App() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-blue-950 leading-[1.1] mb-8 tracking-tight">
               Vizyonu Gerçeğe,<br />
               Gerçeği Mükemmelliğe Dönüştürüyoruz.<br />
-              <span className="text-gray-400">Strength in Scale.</span>
+              <span className="text-gray-400">Sarsılmaz dayanıklılık ve yenilikçi mühendislik.</span>
             </h1>
             <p className="text-lg text-gray-600 mb-10 leading-relaxed font-medium">
               Yılların getirdiği köklü saha tecrübesi ve sarsılmaz iş ahlakımızla, projelerinizi temelden çatıya eksiksiz yönetiyoruz. Her aşamasında şeffaflık, her detayında en yüksek kalite standartlarını barındıran yapılarımızla yatırımlarınızı güvence altına alıyor, söz verdiğimiz zamanda teslim ediyoruz.
@@ -172,10 +172,10 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-x-0 lg:divide-x divide-blue-800">
             {[
-              { label: 'Decades of Excellence', value: '2.5' },
-              { label: 'Corporate Developments', value: '450+' },
-              { label: 'Engineering Specialists', value: '120' },
-              { label: 'Global Partners', value: '300+' }
+              { label: 'Hizmet Süremiz', value: '30+ YIL' },
+              { label: 'Çalışan Sayımız', value: '150+' },
+              { label: 'Teknik Ekibimiz', value: '10' },
+              { label: 'İş Ortaklarımız', value: '20+' }
             ].map((stat, idx) => (
               <div key={idx} className="text-center px-4">
                 <div className="text-4xl md:text-5xl font-light text-white mb-2 tracking-tight">
@@ -264,10 +264,10 @@ export default function App() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="h-px w-8 bg-blue-500"></div>
-              <h3 className="text-blue-400 font-bold uppercase tracking-widest text-sm">Selected Work</h3>
+              <h3 className="text-blue-400 font-bold uppercase tracking-widest text-sm">Projeler Kısmı</h3>
               <div className="h-px w-8 bg-blue-500"></div>
             </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">Corporate Portfolio</h2>
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">Galerimiz</h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-1">
@@ -325,7 +325,7 @@ export default function App() {
                 <div className="flex items-start gap-4">
                   <Phone className="h-6 w-6 text-blue-900 flex-shrink-0 mt-1" strokeWidth={1.5} />
                   <div>
-                    <h4 className="text-sm font-bold uppercase tracking-widest text-blue-950 mb-1">Direct Lines</h4>
+                    <h4 className="text-sm font-bold uppercase tracking-widest text-blue-950 mb-1">Telefon No</h4>
                     <p className="text-gray-600">+90 (532) 524 41 93</p>
                   </div>
                 </div>
@@ -333,7 +333,7 @@ export default function App() {
                 <div className="flex items-start gap-4">
                   <Mail className="h-6 w-6 text-blue-900 flex-shrink-0 mt-1" strokeWidth={1.5} />
                   <div>
-                    <h4 className="text-sm font-bold uppercase tracking-widest text-blue-950 mb-1">Digital Correspondence</h4>
+                    <h4 className="text-sm font-bold uppercase tracking-widest text-blue-950 mb-1">E-Mail</h4>
                     <p className="text-gray-600">info@cobantas.com</p>
                   </div>
                 </div>
