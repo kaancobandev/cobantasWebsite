@@ -374,7 +374,7 @@ export default function App() {
       {/* Footer */}
       <footer className="bg-gray-950 text-gray-400 pt-20 pb-10 border-t-2 border-blue-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
             
             {/* Brand */}
             <div>
@@ -425,22 +425,6 @@ export default function App() {
                   </li>
                 ))}
               </ul>
-            </div>
-
-            {/* Newsletter */}
-            <div>
-              <h4 className="text-white text-sm font-bold uppercase tracking-widest mb-6">Haberler</h4>
-              <p className="text-sm mb-4">Subscribe to receive firm updates and industry insights.</p>
-              <form className="flex flex-col space-y-3" onSubmit={(e) => e.preventDefault()}>
-                <input 
-                  type="email" 
-                  placeholder="Corporate Email Address" 
-                  className="bg-gray-900 border border-gray-800 text-white px-4 py-3 text-sm focus:outline-none focus:border-blue-600 transition-colors"
-                />
-                <button type="submit" className="bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs uppercase tracking-widest py-3 transition-colors">
-                  Subscribe
-                </button>
-              </form>
             </div>
 
           </div>
