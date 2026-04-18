@@ -68,9 +68,10 @@ export default function App() {
           <div className="flex justify-between items-center">
             {/* Logo */}
             <a href="#home" className="flex items-center gap-3 group">
-              <div className="bg-blue-950 text-white p-2 flex items-center justify-center group-hover:bg-blue-900 transition-colors">
-                <Building2 className="h-7 w-7" />
-              </div>
+              {/* Kendi logonuz public klasöründeki logo.png dosyasından buraya gelecektir */}
+              <img src="/çobantaşLogo.png" alt="Çobantaş Logo" className="h-10 w-auto object-contain" />
+              
+              {/* NOT: Eğer logonuzun içinde ÇOBANTAŞ yazısı zaten varsa, aşağıdaki <div className="flex flex-col">...</div> bloğunu silebilirsiniz */}
               <div className="flex flex-col">
                 <span className="text-2xl font-bold tracking-tighter text-blue-950 leading-none">
                   ÇOBANTAŞ
@@ -378,10 +379,9 @@ export default function App() {
             
             {/* Brand */}
             <div>
-              <div className="flex items-center gap-2 mb-6 opacity-90">
-                <div className="bg-white text-blue-950 p-1.5 flex items-center justify-center">
-                  <Building2 className="h-6 w-6 font-bold" />
-                </div>
+              <div className="flex items-center gap-3 mb-6 opacity-90">
+                {/* Alt bilgi için açık renkli logo versiyonu logo-beyaz.png */}
+                <img src="/çobantaşLogo.png" alt="Çobantaş Logo" className="h-8 w-auto object-contain" />
                 <span className="text-2xl font-bold tracking-tighter text-white">
                   ÇOBANTAŞ
                 </span>
