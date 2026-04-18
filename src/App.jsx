@@ -77,7 +77,7 @@ export default function App() {
                   ÇOBANTAŞ
                 </span>
                 <span className="text-[0.65rem] font-bold tracking-[0.2em] text-gray-500 uppercase mt-1">
-                  Construction Group
+                  Gayrimenkul İnşaat
                 </span>
               </div>
             </a>
@@ -272,12 +272,12 @@ export default function App() {
 
           <div className="grid md:grid-cols-3 gap-1">
             {[
-              { img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', title: 'The Horizon Tower', category: 'Commercial HQ' },
-              { img: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', title: 'Echo Valley Bridge', category: 'Civil Infrastructure' },
-              { img: 'https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', title: 'Azure Financial Hub', category: 'Corporate Retail' },
-              { img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', title: 'Nexus Enterprise Center', category: 'Commercial Office' },
-              { img: 'https://images.unsplash.com/photo-1431540015161-0bf868a2d407?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', title: 'Apex Manufacturing', category: 'Industrial Facility' },
-              { img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', title: 'Meridian Complex', category: 'Mixed-Use Development' }
+              { img: './alemara şantiyesi.jpg', title: 'Alemara', category: 'Konut' },
+              { img: './flamingo.jpg', title: 'Flamingo Alkent', category: 'Konut' },
+              { img: './lotus istanbul son hal.jpg', title: 'Lotus İstanbul', category: 'Konut' },
+              { img: './bahce-bahcesehir.jpg', title: 'Bahçe Bahçeşehir', category: 'Konut' },
+              { img: './panorama silivri.jpg', title: 'Panorama Bulvar Silivri', category: 'Konut' },
+              { img: './pinnacle', title: 'Pinnacle', category: 'Konut' }
             ].map((project, idx) => (
               <div key={idx} className="group relative aspect-square overflow-hidden bg-blue-900 cursor-pointer">
                 <img 
