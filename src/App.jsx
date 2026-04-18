@@ -34,10 +34,10 @@ export default function App() {
   }, []);
 
   const navLinks = [
-    { name: 'Corporate', href: '#about' },
-    { name: 'Expertise', href: '#services' },
-    { name: 'Portfolio', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Hakkımızda', href: '#about' },
+    { name: 'Galeri', href: '#services' },
+    { name: 'Projeler', href: '#projects' },
+    { name: 'İletişim', href: '#contact' },
   ];
 
   return (
@@ -47,9 +47,9 @@ export default function App() {
       <div className="bg-blue-950 text-gray-300 py-2 text-xs hidden lg:block border-b border-blue-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="flex gap-6 font-medium tracking-wide">
-            <span className="flex items-center gap-2"><Phone className="h-3.5 w-3.5 text-blue-400"/> +90 (212) 555 0123</span>
-            <span className="flex items-center gap-2"><Mail className="h-3.5 w-3.5 text-blue-400"/> corporate@cobantas.com.tr</span>
-            <span className="flex items-center gap-2"><MapPin className="h-3.5 w-3.5 text-blue-400"/> Levent, Istanbul HQ</span>
+            <span className="flex items-center gap-2"><Phone className="h-3.5 w-3.5 text-blue-400"/> +90 (532) 524 41 93</span>
+            <span className="flex items-center gap-2"><Mail className="h-3.5 w-3.5 text-blue-400"/> info@cobantas.com.tr</span>
+            <span className="flex items-center gap-2"><MapPin className="h-3.5 w-3.5 text-blue-400"/> Küçükçekmece, Istanbul</span>
           </div>
           <div className="flex gap-4">
             <a href="#" className="hover:text-white transition-colors"><LinkedinIcon className="h-4 w-4" /></a>
@@ -156,23 +156,23 @@ export default function App() {
           <div className="bg-white/95 backdrop-blur-sm lg:bg-white p-8 md:p-12 lg:p-16 max-w-2xl border-t-4 border-blue-900 shadow-2xl lg:shadow-none lg:border-t-0 lg:border-l-4">
             <div className="flex items-center gap-3 mb-6">
               <div className="h-px w-8 bg-blue-900"></div>
-              <span className="text-blue-900 text-sm font-bold tracking-widest uppercase">Premier Engineering</span>
+              <span className="text-blue-900 text-sm font-bold tracking-widest uppercase">Güvenle Yükselen</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-blue-950 leading-[1.1] mb-8 tracking-tight">
-              Precision in <br />
-              Every Detail.<br />
+              Vizyonu Gerçeğe,<br />
+              Gerçeği Mükemmelliğe Dönüştürüyoruz.<br />
               <span className="text-gray-400">Strength in Scale.</span>
             </h1>
             <p className="text-lg text-gray-600 mb-10 leading-relaxed font-medium">
-              Çobantaş delivers complex corporate infrastructure and elite commercial developments. We engineer the foundations of modern enterprise with absolute integrity.
+              Yılların getirdiği köklü saha tecrübesi ve sarsılmaz iş ahlakımızla, projelerinizi temelden çatıya eksiksiz yönetiyoruz. Her aşamasında şeffaflık, her detayında en yüksek kalite standartlarını barındıran yapılarımızla yatırımlarınızı güvence altına alıyor, söz verdiğimiz zamanda teslim ediyoruz.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a href="#projects" className="bg-blue-950 hover:bg-blue-900 text-white px-8 py-4 font-bold text-sm uppercase tracking-widest transition-colors flex items-center justify-center gap-3 group">
-                Explore Portfolio
+                Projelerimize Göz Atın
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </a>
               <a href="#about" className="bg-gray-100 hover:bg-gray-200 text-blue-950 px-8 py-4 font-bold text-sm uppercase tracking-widest transition-colors flex items-center justify-center">
-                Corporate Profile
+                Hakkımızda
               </a>
             </div>
           </div>
