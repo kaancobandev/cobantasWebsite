@@ -172,9 +172,9 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-x-0 lg:divide-x divide-blue-800">
             {[
-              { label: 'Hizmet Süremiz', value: '30+ YIL' },
+              { label: 'Hizmet Süremiz', value: '30+' },
               { label: 'Çalışan Sayımız', value: '150+' },
-              { label: 'Teknik Ekibimiz', value: '10' },
+              { label: 'Bitirilen Proje', value: '30+' },
               { label: 'İş Ortaklarımız', value: '20+' }
             ].map((stat, idx) => (
               <div key={idx} className="text-center px-4">
