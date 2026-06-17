@@ -1,4 +1,59 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-stone-50 text-ink-800 font-sans antialiased;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  }
+
+  /* Zarif serif başlıklarda ince optik ayarlar */
+  h1, h2, h3 {
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: #9a6a3c;
+    color: #faf6f1;
+  }
+}
+
+@layer components {
+  /* Bölüm üstü ince bronz etiket çizgisi */
+  .eyebrow-line {
+    @apply h-px w-10 bg-bronze-600;
+  }
+}
+
+/* Kaydırınca yumuşak beliriş animasyonu */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Erişilebilirlik: hareketi azalt tercihinde animasyonu kapat */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
