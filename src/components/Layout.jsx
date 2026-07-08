@@ -57,7 +57,7 @@ export default function Layout() {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3.5">
               <span className="grid h-11 w-11 place-items-center rounded-sm bg-white p-1 ring-1 ring-stone-200">
-                <img src="/çobantaşLogo.jpeg" alt="Çobantaş Logo" className="h-full w-auto object-contain" />
+                <img src="/cobantas-logo.jpeg" alt="Çobantaş Logo" className="h-full w-auto object-contain" />
               </span>
               <div className="flex flex-col leading-none">
                 <span className="text-xl font-bold tracking-tight text-ink-900">ÇOBANTAŞ</span>
@@ -162,7 +162,7 @@ export default function Layout() {
             <div className="lg:col-span-2 lg:pr-10">
               <div className="mb-6 flex items-center gap-3.5">
                 <span className="grid h-11 w-11 place-items-center rounded-sm bg-white p-1">
-                  <img src="/çobantaşLogo.jpeg" alt="Çobantaş Logo" className="h-full w-auto object-contain" />
+                  <img src="/cobantas-logo.jpeg" alt="Çobantaş Logo" className="h-full w-auto object-contain" />
                 </span>
                 <div className="flex flex-col leading-none">
                   <span className="text-xl font-bold tracking-tight text-white">ÇOBANTAŞ</span>

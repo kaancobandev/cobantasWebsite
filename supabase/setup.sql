@@ -61,11 +61,15 @@ create policy "media_admin_delete"
   using (bucket_id = 'project-media');
 
 -- 4) (İsteğe bağlı) Mevcut projeleri başlangıç verisi olarak ekle.
---    Görseller sitenin public/ klasöründen gelir. İstemiyorsan bu bloğu çalıştırma.
-insert into public.projects (title, type, cover_url) values
+--    Yalnızca tablo boşken ekler; betik tekrar çalıştırılsa bile mükerrer kayıt oluşmaz.
+insert into public.projects (title, type, cover_url)
+select v.title, v.type, v.cover_url
+from (values
   ('Pinnacle',                'Konut', '/pinnacle.jpg'),
-  ('Panorama Bulvar Silivri', 'Konut', '/panorama silivri.png'),
+  ('Panorama Bulvar Silivri', 'Konut', '/panorama-silivri.png'),
   ('Bahçe Bahçeşehir',        'Konut', '/bahce-bahcesehir.jpg'),
-  ('Lotus İstanbul',          'Konut', '/lotus istanbul son hal.jpg'),
+  ('Lotus İstanbul',          'Konut', '/lotus-istanbul.jpg'),
   ('Flamingo Alkent',         'Konut', '/flamingo.jpg'),
-  ('Alemara',                 'Konut', '/alemara şantiyesi.jpg');
+  ('Alemara',                 'Konut', '/alemara.jpg')
+) as v(title, type, cover_url)
+where not exists (select 1 from public.projects);

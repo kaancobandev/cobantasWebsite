@@ -133,7 +133,7 @@ export default function Home() {
             <div className="reveal relative order-2 lg:order-1">
               <div className="absolute -inset-3 hidden border border-bronze-300/60 lg:block" />
               <img
-                src="/lotus istanbul son hal.jpg"
+                src="/lotus-istanbul.jpg"
                 alt="Çobantaş projesi"
                 className="relative h-[58vh] w-full object-cover"
               />
