@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://www.cobantas.com/sitemap.xml
+Sitemap: https://cobantas.com/sitemap.xml
