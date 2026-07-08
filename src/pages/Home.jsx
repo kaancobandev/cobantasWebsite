@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Building2, HardHat, Ruler, Hammer,
@@ -8,6 +9,7 @@ import {
 import { Eyebrow } from '../components/ui';
 import ContactForm from '../components/ContactForm';
 import CountUp from '../components/CountUp';
+import HeroSlideshow from '../components/HeroSlideshow';
 import useScrollReveal from '../hooks/useScrollReveal';
 import { useProjects } from '../hooks/useProjects';
 
@@ -55,6 +57,14 @@ export default function Home() {
   const { projects } = useProjects();
   useScrollReveal([projects.length]);
 
+  // Hero'da gerçek proje kapakları döner; projeler yüklenene kadar mimari bir görsel gösterilir.
+  const heroImages = useMemo(() => {
+    const covers = projects.map((p) => p.cover_url).filter(Boolean).slice(0, 5);
+    return covers.length
+      ? covers
+      : ['https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=80'];
+  }, [projects]);
+
   return (
     <>
       {/* Hero */}
@@ -95,12 +105,8 @@ export default function Home() {
               <div className="relative">
                 <div className="absolute -inset-3 hidden border border-bronze-300/60 lg:block" />
                 <div className="relative overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=80"
-                    alt="Modern mimari"
-                    className="h-[52vh] w-full object-cover lg:h-[64vh]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink-950/40 via-ink-950/5 to-transparent" />
+                  <HeroSlideshow images={heroImages} className="h-[52vh] w-full lg:h-[64vh]" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/40 via-ink-950/5 to-transparent" />
                 </div>
                 <div className="absolute -bottom-6 -left-6 hidden bg-white p-6 shadow-soft lg:block">
                   <div className="font-serif text-5xl leading-none text-ink-900">30+</div>

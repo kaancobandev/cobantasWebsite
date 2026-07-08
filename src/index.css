@@ -53,6 +53,15 @@
   transform: none;
 }
 
+/* Sinematik hero: yavaş Ken Burns zoom */
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+.animate-kenburns {
+  animation: kenburns 8s ease-out forwards;
+}
+
 /* Erişilebilirlik: hareketi azalt tercihinde animasyonu kapat */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -62,5 +71,8 @@
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .animate-kenburns {
+    animation: none;
   }
 }
