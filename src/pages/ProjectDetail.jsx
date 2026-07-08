@@ -40,7 +40,7 @@ function Carousel({ images, title }) {
 export default function ProjectDetail() {
   const { id } = useParams();
   const { project, loading } = useProject(id);
-  useScrollReveal();
+  useScrollReveal([loading]);
 
   useEffect(() => {
     if (project) document.title = `${project.title} | Çobantaş`;

@@ -6,8 +6,8 @@ import useScrollReveal from '../hooks/useScrollReveal';
 import { useProjects } from '../hooks/useProjects';
 
 export default function Projects() {
-  useScrollReveal();
   const { projects, loading } = useProjects();
+  useScrollReveal([loading, projects.length]);
 
   useEffect(() => {
     document.title = 'Projeler | Çobantaş Gayrimenkul İnşaat';

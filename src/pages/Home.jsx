@@ -44,8 +44,8 @@ const values = [
 ];
 
 export default function Home() {
-  useScrollReveal();
   const { projects } = useProjects();
+  useScrollReveal([projects.length]);
 
   return (
     <>
