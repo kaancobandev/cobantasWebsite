@@ -3,9 +3,11 @@ import {
   Building2, HardHat, Ruler, Hammer,
   Phone, Mail, MapPin,
   ArrowRight, ArrowUpRight, CheckCircle2, ShieldCheck,
+  Factory, ClipboardCheck,
 } from 'lucide-react';
 import { Eyebrow } from '../components/ui';
 import ContactForm from '../components/ContactForm';
+import CountUp from '../components/CountUp';
 import useScrollReveal from '../hooks/useScrollReveal';
 import { useProjects } from '../hooks/useProjects';
 
@@ -41,6 +43,12 @@ const values = [
   'Gelişmiş Yapısal Mühendislik',
   'Zaman Çizelgesine Sıkı Uyum',
   'Sürdürülebilir ve Çevre Dostu Uygulamalar',
+];
+
+const activityLines = [
+  { icon: Factory, type: 'Fabrika', title: 'Fabrika & Endüstriyel Yapılar', desc: 'Üretim tesisleri, depo ve endüstriyel yapıların projelendirilmesi ve anahtar teslim inşası.' },
+  { icon: Building2, type: 'Konut', title: 'Konut Projeleri', desc: 'Modern mimari ile yüksek yaşam kalitesini buluşturan prestijli konut projeleri.' },
+  { icon: ClipboardCheck, type: 'Taahhüt', title: 'Taahhüt İşleri', desc: 'Planlamadan teslime kadar uçtan uca yönetilen anahtar teslim taahhüt hizmetleri.' },
 ];
 
 export default function Home() {
@@ -116,11 +124,43 @@ export default function Home() {
                 className={`reveal px-4 py-12 text-center lg:py-14 ${idx > 0 ? 'lg:border-l lg:border-stone-200' : ''} ${idx % 2 === 1 ? 'border-l border-stone-200' : ''} ${idx > 1 ? 'border-t border-stone-200 lg:border-t-0' : ''}`}
                 style={{ transitionDelay: `${idx * 90}ms` }}
               >
-                <div className="font-serif text-5xl text-ink-900 lg:text-6xl">{stat.value}</div>
+                <CountUp value={stat.value} className="block font-serif text-5xl text-ink-900 lg:text-6xl" />
                 <div className="mt-3 text-[0.7rem] font-semibold uppercase tracking-widestx text-bronze-700">
                   {stat.label}
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Faaliyet Alanlarımız */}
+      <section className="py-20 md:py-28 lg:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mb-14 max-w-2xl">
+            <Eyebrow>Faaliyet Alanlarımız</Eyebrow>
+            <h2 className="mt-6 font-serif text-3xl leading-tight text-ink-900 md:text-[2.7rem]">
+              Uzmanlaştığımız alanlar
+            </h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {activityLines.map((a, idx) => (
+              <Link
+                key={idx}
+                to={`/projeler?tur=${encodeURIComponent(a.type)}`}
+                className="reveal group flex flex-col border border-stone-200 bg-white p-9 transition-all duration-300 hover:-translate-y-1 hover:border-bronze-300 hover:shadow-card"
+                style={{ transitionDelay: `${idx * 80}ms` }}
+              >
+                <div className="grid h-14 w-14 place-items-center bg-stone-100 text-bronze-600 transition-colors group-hover:bg-bronze-600 group-hover:text-white">
+                  <a.icon className="h-7 w-7" strokeWidth={1.25} />
+                </div>
+                <h3 className="mt-7 font-serif text-xl text-ink-900">{a.title}</h3>
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-ink-500">{a.desc}</p>
+                <span className="mt-6 inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-bronze-700">
+                  Projeleri Gör
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
             ))}
           </div>
         </div>

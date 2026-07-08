@@ -23,6 +23,13 @@
     background-color: #9a6a3c;
     color: #faf6f1;
   }
+
+  /* Erişilebilirlik: klavye ile gezinirken belirgin odak halkası */
+  :focus-visible {
+    outline: 2px solid #9a6a3c;
+    outline-offset: 2px;
+    border-radius: 1px;
+  }
 }
 
 @layer components {

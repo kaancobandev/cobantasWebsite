@@ -30,9 +30,19 @@ export default function Layout() {
 
   const closeMenu = () => setMobileMenuOpen(false);
   const InstagramIcon = socialIcons.instagram;
+  const WhatsappIcon = socialIcons.whatsapp;
+  const whatsapp = socials.find((s) => s.icon === 'whatsapp');
 
   return (
     <div className="min-h-screen bg-stone-50 font-sans text-ink-800">
+
+      {/* Erişilebilirlik: içeriğe atla bağlantısı */}
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-bronze-600 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+      >
+        İçeriğe geç
+      </a>
 
       {/* Üst bilgi çubuğu */}
       <div className="hidden border-b border-stone-200 bg-stone-100 py-2.5 text-xs lg:block">
@@ -107,6 +117,8 @@ export default function Layout() {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-ink-900 transition-colors hover:text-bronze-600 md:hidden"
               aria-label="Menü"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobil-menu"
             >
               {mobileMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
             </button>
@@ -115,7 +127,7 @@ export default function Layout() {
 
         {/* Mobil menü */}
         {mobileMenuOpen && (
-          <div className="absolute left-0 top-full w-full border-t border-ink-800 bg-ink-950 shadow-2xl md:hidden">
+          <div id="mobil-menu" className="absolute left-0 top-full w-full border-t border-ink-800 bg-ink-950 shadow-2xl md:hidden">
             <div className="space-y-1 px-6 pb-6 pt-2">
               {navItems.map((item) =>
                 item.to ? (
@@ -151,7 +163,7 @@ export default function Layout() {
       </nav>
 
       {/* Sayfa içeriği */}
-      <main>
+      <main id="main" tabIndex={-1}>
         <Outlet />
       </main>
 
@@ -207,41 +219,63 @@ export default function Layout() {
                     Projeler
                   </Link>
                 </li>
-                {['Vizyon & Misyon', 'Biten Projeler'].map((link) => (
-                  <li key={link}>
-                    <a href="#" className="flex items-center gap-2 transition-colors hover:text-bronze-400">
-                      <ChevronRight className="h-3 w-3 text-bronze-600" />
-                      {link}
-                    </a>
-                  </li>
-                ))}
+                <li>
+                  <Link to="/hakkimizda" className="flex items-center gap-2 transition-colors hover:text-bronze-400">
+                    <ChevronRight className="h-3 w-3 text-bronze-600" />
+                    Vizyon & Misyon
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/iletisim" className="flex items-center gap-2 transition-colors hover:text-bronze-400">
+                    <ChevronRight className="h-3 w-3 text-bronze-600" />
+                    İletişim
+                  </Link>
+                </li>
               </ul>
             </div>
 
             <div>
-              <h4 className="mb-6 text-[0.7rem] font-semibold uppercase tracking-widestx text-white">Yasal</h4>
+              <h4 className="mb-6 text-[0.7rem] font-semibold uppercase tracking-widestx text-white">İletişim</h4>
               <ul className="space-y-3.5 text-sm">
-                {['Gizlilik Politikası', 'Kişisel Verilerin Korunması', 'Kullanım Koşulları'].map((link) => (
-                  <li key={link}>
-                    <a href="#" className="flex items-center gap-2 transition-colors hover:text-bronze-400">
-                      <ChevronRight className="h-3 w-3 text-bronze-600" />
-                      {link}
-                    </a>
-                  </li>
-                ))}
+                <li className="flex items-start gap-2">
+                  <MapPin className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-bronze-600" />
+                  <span>Küçükçekmece / İstanbul</span>
+                </li>
+                <li>
+                  <a href={contactInfo.phoneHref} className="flex items-center gap-2 transition-colors hover:text-bronze-400">
+                    <Phone className="h-3.5 w-3.5 flex-shrink-0 text-bronze-600" />
+                    {contactInfo.phoneDisplay}
+                  </a>
+                </li>
+                <li>
+                  <a href={contactInfo.emailHref} className="flex items-center gap-2 transition-colors hover:text-bronze-400">
+                    <Mail className="h-3.5 w-3.5 flex-shrink-0 text-bronze-600" />
+                    {contactInfo.email}
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
 
           <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-center text-xs tracking-wide md:flex-row md:text-left">
             <p>&copy; {new Date().getFullYear()} Çobantaş Gayrimenkul İnşaat. Tüm hakları saklıdır.</p>
-            <div className="flex gap-6">
-              <a href="#" className="transition-colors hover:text-white">Gizlilik Politikası</a>
-              <a href="#" className="transition-colors hover:text-white">Kullanım Koşulları</a>
-            </div>
+            <a href={contactInfo.emailHref} className="transition-colors hover:text-white">{contactInfo.email}</a>
           </div>
         </div>
       </footer>
+
+      {/* Sabit WhatsApp butonu */}
+      {whatsapp && (
+        <a
+          href={whatsapp.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp ile yazın"
+          className="fixed bottom-5 right-5 z-40 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-105"
+        >
+          <WhatsappIcon className="h-7 w-7" />
+        </a>
+      )}
 
     </div>
   );

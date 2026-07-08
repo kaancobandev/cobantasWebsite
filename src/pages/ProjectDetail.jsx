@@ -48,7 +48,18 @@ export default function ProjectDetail() {
   }, [project]);
 
   if (loading) {
-    return <div className="grid min-h-[60vh] place-items-center text-ink-500">Yükleniyor…</div>;
+    return (
+      <div className="mx-auto max-w-5xl px-6 py-16 lg:px-8">
+        <div className="h-3 w-40 animate-pulse bg-stone-200" />
+        <div className="mt-6 h-10 w-2/3 animate-pulse bg-stone-200" />
+        <div className="mt-10 aspect-[16/9] w-full animate-pulse bg-stone-200" />
+        <div className="mx-auto mt-10 max-w-3xl space-y-3">
+          <div className="h-3 w-full animate-pulse bg-stone-200" />
+          <div className="h-3 w-11/12 animate-pulse bg-stone-200" />
+          <div className="h-3 w-3/4 animate-pulse bg-stone-200" />
+        </div>
+      </div>
+    );
   }
 
   if (!project) {

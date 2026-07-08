@@ -1,18 +1,45 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowUpRight, ArrowRight, ChevronRight } from 'lucide-react';
 import { Eyebrow } from '../components/ui';
 import useScrollReveal from '../hooks/useScrollReveal';
 import { useProjects } from '../hooks/useProjects';
 
+function SkeletonCard() {
+  return (
+    <div className="overflow-hidden border border-stone-200 bg-white">
+      <div className="aspect-[4/3] w-full animate-pulse bg-stone-200" />
+      <div className="space-y-3 p-6">
+        <div className="h-2.5 w-16 animate-pulse bg-stone-200" />
+        <div className="h-5 w-2/3 animate-pulse bg-stone-200" />
+      </div>
+    </div>
+  );
+}
+
 export default function Projects() {
   const { projects, loading } = useProjects();
-  useScrollReveal([loading, projects.length]);
+  const [params, setParams] = useSearchParams();
+  const active = params.get('tur') || 'Tümü';
+
+  const types = useMemo(
+    () => ['Tümü', ...Array.from(new Set(projects.map((p) => p.type).filter(Boolean)))],
+    [projects]
+  );
+  const filtered = useMemo(
+    () => (active === 'Tümü' ? projects : projects.filter((p) => p.type === active)),
+    [projects, active]
+  );
+
+  // Filtre değişince yeni kartlar için beliriş animasyonunu yeniden tetikle
+  useScrollReveal([loading, active, filtered.length]);
 
   useEffect(() => {
     document.title = 'Projeler | Çobantaş Gayrimenkul İnşaat';
     return () => { document.title = 'Çobantaş | Gayrimenkul & İnşaat'; };
   }, []);
+
+  const selectTab = (t) => setParams(t === 'Tümü' ? {} : { tur: t }, { replace: true });
 
   return (
     <>
@@ -37,11 +64,34 @@ export default function Projects() {
       {/* Proje listesi — satırda 3, en son eklenen en başta */}
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          {/* Kategori sekmeleri */}
+          {!loading && types.length > 1 && (
+            <div className="mb-10 flex flex-wrap gap-2">
+              {types.map((t) => (
+                <button
+                  key={t}
+                  onClick={() => selectTab(t)}
+                  className={`border px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] transition-colors ${
+                    active === t
+                      ? 'border-bronze-600 bg-bronze-600 text-white'
+                      : 'border-stone-300 text-ink-600 hover:border-bronze-600 hover:text-bronze-700'
+                  }`}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
+          )}
+
           {loading ? (
-            <p className="text-ink-500">Yükleniyor…</p>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)}
+            </div>
+          ) : filtered.length === 0 ? (
+            <p className="py-10 text-center text-ink-500">Bu kategoride henüz proje bulunmuyor.</p>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {projects.map((p, idx) => (
+              {filtered.map((p, idx) => (
                 <Link
                   key={p.id}
                   to={`/projeler/${p.id}`}
@@ -54,6 +104,7 @@ export default function Projects() {
                         src={p.cover_url}
                         alt={p.title}
                         loading="lazy"
+                        decoding="async"
                         className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                       />
                     )}

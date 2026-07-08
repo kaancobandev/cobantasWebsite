@@ -6,6 +6,7 @@ import {
   Factory, Building2, ClipboardCheck,
 } from 'lucide-react';
 import { Eyebrow } from '../components/ui';
+import CountUp from '../components/CountUp';
 import useScrollReveal from '../hooks/useScrollReveal';
 
 const stats = [
@@ -209,7 +210,7 @@ export default function About() {
                 className={`reveal px-4 py-14 text-center ${idx > 0 ? 'lg:border-l lg:border-white/10' : ''} ${idx % 2 === 1 ? 'border-l border-white/10' : ''} ${idx > 1 ? 'border-t border-white/10 lg:border-t-0' : ''}`}
                 style={{ transitionDelay: `${idx * 90}ms` }}
               >
-                <div className="font-serif text-5xl text-white lg:text-6xl">{stat.value}</div>
+                <CountUp value={stat.value} className="block font-serif text-5xl text-white lg:text-6xl" />
                 <div className="mt-3 text-[0.7rem] font-semibold uppercase tracking-widestx text-bronze-300">
                   {stat.label}
                 </div>
