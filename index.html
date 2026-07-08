@@ -61,6 +61,20 @@
     />
   </head>
   <body>
+    <!--
+      Netlify Forms tespiti: Netlify bu gizli statik formu derleme anında tarayıp
+      "iletisim" formunu ve alanlarını kaydeder. React formu bu ada AJAX ile gönderir.
+    -->
+    <form name="iletisim" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="iletisim" />
+      <input name="bot-field" />
+      <input type="text" name="ad" />
+      <input type="text" name="soyad" />
+      <input type="email" name="email" />
+      <input type="tel" name="telefon" />
+      <textarea name="aciklama"></textarea>
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
