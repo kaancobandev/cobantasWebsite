@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Çevre değişkenleri (gizli anahtarlar git'e gitmesin)
+.env
+.env.*
+!.env.example
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
