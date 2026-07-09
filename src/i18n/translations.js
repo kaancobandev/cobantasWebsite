@@ -58,6 +58,11 @@ const tr = {
       intro: 'İstanbul ve çevresinde hayata geçirdiğimiz, kaliteyi ve estetiği bir araya getiren yapılarımızdan bir seçki.',
       all: 'Tüm Projeler',
     },
+    spotlight: {
+      eyebrow: 'Öne Çıkan Proje',
+      fallbackDesc: 'Kaliteyi ve estetiği bir araya getiren imza projelerimizden biri.',
+      cta: 'Projeyi İncele',
+    },
     partners: { eyebrow: 'İş Ortaklarımız', heading: 'Güvenle birlikte yükseldiğimiz kurumlar' },
     contact: {
       eyebrow: 'İletişim',
@@ -205,6 +210,11 @@ const en = {
       heading: 'Selected projects',
       intro: 'A selection of the structures we have delivered in and around Istanbul, bringing together quality and aesthetics.',
       all: 'All Projects',
+    },
+    spotlight: {
+      eyebrow: 'Featured Project',
+      fallbackDesc: 'One of our signature projects, uniting quality and aesthetics.',
+      cta: 'Explore the Project',
     },
     partners: { eyebrow: 'Our Partners', heading: 'The institutions we rise alongside with confidence' },
     contact: {

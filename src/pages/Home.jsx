@@ -33,6 +33,9 @@ const serviceIcons = [Building2, Ruler, HardHat, Hammer];
 const activityIcons = [Factory, Building2, ClipboardCheck];
 const activityTypes = ['Fabrika', 'Konut', 'Taahhüt'];
 
+// Anasayfada öne çıkan amiral proje (başlığa göre bulunur)
+const FLAGSHIP_TITLE = 'Alemara';
+
 export default function Home() {
   const { t } = useLang();
   const { projects } = useProjects();
@@ -45,6 +48,8 @@ export default function Home() {
       ? covers
       : ['https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=80'];
   }, [projects]);
+
+  const flagship = useMemo(() => projects.find((p) => p.title === FLAGSHIP_TITLE) || null, [projects]);
 
   const stats = t('home.stats');
   const services = t('home.services.items');
@@ -251,6 +256,58 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Amiral Proje Spotlight */}
+      {flagship && (
+        <section className="border-t border-stone-200 bg-stone-50 py-20 md:py-28 lg:py-32">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+              <Link
+                to={`/projeler/${flagship.id}`}
+                className="reveal group relative order-2 block lg:order-1"
+              >
+                <div className="pointer-events-none absolute -inset-3 hidden border border-bronze-300/60 lg:block" />
+                <div className="relative overflow-hidden">
+                  <img
+                    src={flagship.cover_url}
+                    alt={flagship.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink-950/30 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                </div>
+              </Link>
+
+              <div className="reveal order-1 lg:order-2">
+                <Eyebrow>{t('home.spotlight.eyebrow')}</Eyebrow>
+                <h2 className="mt-6 font-serif text-4xl leading-tight text-ink-900 md:text-5xl">
+                  {flagship.title}
+                </h2>
+                <div className="mt-5 flex flex-wrap items-center gap-3 text-[0.7rem] font-semibold uppercase tracking-widestx text-bronze-700">
+                  <span>{flagship.type}</span>
+                  {flagship.area_m2 ? (
+                    <>
+                      <span className="text-stone-300">·</span>
+                      <span>{Number(flagship.area_m2).toLocaleString('tr-TR')} m²</span>
+                    </>
+                  ) : null}
+                </div>
+                <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink-500 line-clamp-3">
+                  {flagship.body ? flagship.body : t('home.spotlight.fallbackDesc')}
+                </p>
+                <Link
+                  to={`/projeler/${flagship.id}`}
+                  className="group mt-9 inline-flex items-center gap-2.5 bg-bronze-600 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-bronze-700"
+                >
+                  {t('home.spotlight.cta')}
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Projeler */}
       <section id="projects" className="bg-ink-950 py-20 text-white md:py-28 lg:py-32">
