@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { X, UploadCloud, ImagePlus } from 'lucide-react';
 import { supabase, MEDIA_BUCKET } from '../../lib/supabase';
 
-const TYPES = ['Konut', 'Fabrika', 'Taahhüt'];
+// Proje türleri — veritabanındaki CHECK kısıtıyla birebir aynı olmalı
+// (bkz. supabase/setup.sql ve supabase/update-types.sql)
+const TYPES = ['Müteahhitlik', 'Taahhüt', 'Kentsel Dönüşüm', 'Sanayi Yapıları'];
 
 async function uploadFile(file, folder) {
   const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
@@ -18,7 +20,7 @@ async function uploadFile(file, folder) {
 export default function ProjectForm({ project, onSaved, onCancel }) {
   const editing = Boolean(project);
   const [title, setTitle] = useState(project?.title || '');
-  const [type, setType] = useState(project?.type || 'Konut');
+  const [type, setType] = useState(project?.type || TYPES[0]);
   const [area, setArea] = useState(project?.area_m2 ?? '');
   const [body, setBody] = useState(project?.body || '');
 

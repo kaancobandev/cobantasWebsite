@@ -8,7 +8,7 @@ create table if not exists public.projects (
   id          uuid primary key default gen_random_uuid(),
   created_at  timestamptz not null default now(),
   title       text not null,
-  type        text not null default 'Konut' check (type in ('Konut','Fabrika','Taahhüt')),
+  type        text not null default 'Taahhüt' check (type in ('Müteahhitlik','Taahhüt','Kentsel Dönüşüm','Sanayi Yapıları')),
   area_m2     integer,
   cover_url   text,
   body        text,
@@ -65,11 +65,11 @@ create policy "media_admin_delete"
 insert into public.projects (title, type, cover_url)
 select v.title, v.type, v.cover_url
 from (values
-  ('Pinnacle',                'Konut', '/pinnacle.jpg'),
-  ('Panorama Bulvar Silivri', 'Konut', '/panorama-silivri.jpg'),
-  ('Bahçe Bahçeşehir',        'Konut', '/bahce-bahcesehir.jpg'),
-  ('Lotus İstanbul',          'Konut', '/lotus-istanbul.jpg'),
-  ('Flamingo Alkent',         'Konut', '/flamingo.jpg'),
-  ('Alemara',                 'Konut', '/alemara.jpg')
+  ('Pinnacle',                'Taahhüt', '/pinnacle.jpg'),
+  ('Panorama Bulvar Silivri', 'Taahhüt', '/panorama-silivri.jpg'),
+  ('Bahçe Bahçeşehir',        'Taahhüt', '/bahce-bahcesehir.jpg'),
+  ('Lotus İstanbul',          'Taahhüt', '/lotus-istanbul.jpg'),
+  ('Flamingo Alkent',         'Taahhüt', '/flamingo.jpg'),
+  ('Alemara',                 'Taahhüt', '/alemara.jpg')
 ) as v(title, type, cover_url)
 where not exists (select 1 from public.projects);

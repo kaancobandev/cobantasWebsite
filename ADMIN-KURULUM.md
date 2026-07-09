@@ -43,7 +43,7 @@ Sonra yeniden deploy et.
 `/admin` → e-posta + şifre ile giriş → **Yeni Proje**:
 - **Kapak fotoğrafı** (liste ve kart görseli)
 - **Proje adı**
-- **Tür** (Konut / Fabrika / Taahhüt)
+- **Tür** (Müteahhitlik / Taahhüt / Kentsel Dönüşüm / Sanayi Yapıları)
 - **Alan (m²)**
 - **Detay metni** (proje sayfasında görünür)
 - **Carousel fotoğrafları** (detay sayfasındaki kayan galeri)
