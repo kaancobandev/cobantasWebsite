@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Building2, HardHat, Ruler, Hammer,
@@ -14,6 +14,7 @@ import useScrollReveal from '../hooks/useScrollReveal';
 import { useProjects } from '../hooks/useProjects';
 import { useLang } from '../context/LanguageContext';
 import { contactInfo } from '../data/site';
+import { playIntroExit } from '../lib/intro';
 
 const partners = [
   { name: 'Batı Yapı', src: '/logos/bati-yapi.png' },
@@ -40,6 +41,9 @@ export default function Home() {
   const { t } = useLang();
   const { projects } = useProjects();
   useScrollReveal([projects.length]);
+
+  // Uygulama render edildi → giriş perdesini soldan sağa kaydırıp kaldır
+  useEffect(() => { playIntroExit(); }, []);
 
   // Hero'da gerçek proje kapakları döner; projeler yüklenene kadar mimari bir görsel gösterilir.
   const heroImages = useMemo(() => {

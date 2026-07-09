@@ -63,8 +63,64 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!--
+      Giriş perdesi: ilk boyamada anında siyah olsun diye stiller satır içi.
+      (CSS paketi yüklenmeden önce de çalışır; beyaz sıçrama olmaz.)
+    -->
+    <style>
+      #intro {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-items: center;
+        background: #000;
+        transition: transform 620ms cubic-bezier(0.76, 0, 0.24, 1);
+        will-change: transform;
+      }
+      #intro img {
+        width: 130px;
+        max-width: 40vw;
+        height: auto;
+        /* Logo siyah-üzerine-beyaz JPEG; ters çevirince beyaz mark siyah zeminde kusursuz oturur */
+        filter: invert(1);
+        animation: introLogo 420ms ease-out both;
+      }
+      @keyframes introLogo {
+        from { opacity: 0; transform: scale(0.92); }
+        to { opacity: 1; transform: none; }
+      }
+      /* Soldan sağa kayarak çık */
+      #intro.intro-leave { transform: translateX(100%); }
+
+      @media (prefers-reduced-motion: reduce) {
+        #intro { display: none; }
+      }
+    </style>
   </head>
   <body>
+    <!-- Giriş perdesi (yalnızca anasayfa). Çıkışını React, uygulama hazır olunca tetikler. -->
+    <div id="intro" aria-hidden="true">
+      <img src="/cobantas-logo.jpeg" alt="" />
+    </div>
+    <script>
+      (function () {
+        var el = document.getElementById('intro');
+        if (!el) return;
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        // Sadece anasayfada göster; hareketi azalt tercihinde hiç gösterme
+        if (window.location.pathname !== '/' || reduce) {
+          el.remove();
+          return;
+        }
+        // Güvenlik ağı: uygulama bir sebeple açılmazsa perde ekranda kilitli kalmasın
+        window.__introFailsafe = setTimeout(function () {
+          if (el.parentNode) el.remove();
+        }, 4000);
+      })();
+    </script>
+
     <!--
       Netlify Forms tespiti: Netlify bu gizli statik formu derleme anında tarayıp
       "iletisim" formunu ve alanlarını kaydeder. React formu bu ada AJAX ile gönderir.
