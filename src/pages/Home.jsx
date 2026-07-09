@@ -10,6 +10,7 @@ import { Eyebrow } from '../components/ui';
 import ContactForm from '../components/ContactForm';
 import CountUp from '../components/CountUp';
 import HeroSlideshow from '../components/HeroSlideshow';
+import ProjectCarousel from '../components/ProjectCarousel';
 import useScrollReveal from '../hooks/useScrollReveal';
 import { useProjects } from '../hooks/useProjects';
 import { useLang } from '../context/LanguageContext';
@@ -37,6 +38,16 @@ const activityTypes = ['Fabrika', 'Konut', 'Taahhüt'];
 // Anasayfada öne çıkan amiral proje (başlığa göre bulunur)
 const FLAGSHIP_TITLE = 'Alemara';
 
+// Sayfanın en üstündeki slider — sıra kasıtlıdır.
+// "img" yerel yedek: Supabase yüklenmeden görseller anında görünsün diye.
+const HERO_SLIDES = [
+  { title: 'Bahçe Bahçeşehir', img: '/bahce-bahcesehir.jpg' },
+  { title: 'Flamingo Alkent', img: '/flamingo.jpg' },
+  { title: 'Alemara', img: '/alemara.jpg' },
+  { title: 'Lotus İstanbul', img: '/lotus-istanbul.jpg' },
+  { title: 'Pinnacle', img: '/pinnacle.jpg' },
+];
+
 export default function Home() {
   const { t } = useLang();
   const { projects } = useProjects();
@@ -55,6 +66,16 @@ export default function Home() {
 
   const flagship = useMemo(() => projects.find((p) => p.title === FLAGSHIP_TITLE) || null, [projects]);
 
+  // Slider: görseller hemen görünür; projeler yüklenince kapak/başlık linki DB'den gelir
+  const carouselSlides = useMemo(
+    () =>
+      HERO_SLIDES.map((s) => {
+        const p = projects.find((x) => x.title === s.title);
+        return { title: s.title, img: p?.cover_url || s.img, id: p?.id, type: p?.type };
+      }),
+    [projects]
+  );
+
   const stats = t('home.stats');
   const services = t('home.services.items');
   const activity = t('home.activity.items');
@@ -67,6 +88,9 @@ export default function Home() {
 
   return (
     <>
+      {/* Sayfanın en üstü: 5 projelik tam genişlik slider */}
+      <ProjectCarousel slides={carouselSlides} />
+
       {/* Hero */}
       <section id="home" className="relative overflow-hidden bg-stone-50">
         <div className="pointer-events-none absolute inset-y-0 right-[35%] hidden w-px bg-stone-200 lg:block" />
