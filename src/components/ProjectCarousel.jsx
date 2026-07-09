@@ -6,7 +6,7 @@ import { useLang } from '../context/LanguageContext';
 // Anasayfanın en üstündeki tam genişlik proje slider'ı.
 // Görseller yumuşak crossfade ile geçer, aktif görsele yavaş Ken Burns zoom uygulanır.
 // prefers-reduced-motion açıkken: otomatik geçiş ve zoom kapalı (oklarla gezilebilir).
-export default function ProjectCarousel({ slides = [], interval = 5000 }) {
+export default function ProjectCarousel({ slides = [], interval = 2000 }) {
   const { t } = useLang();
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
