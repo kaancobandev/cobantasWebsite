@@ -66,7 +66,7 @@ insert into public.projects (title, type, cover_url)
 select v.title, v.type, v.cover_url
 from (values
   ('Pinnacle',                'Konut', '/pinnacle.jpg'),
-  ('Panorama Bulvar Silivri', 'Konut', '/panorama-silivri.png'),
+  ('Panorama Bulvar Silivri', 'Konut', '/panorama-silivri.jpg'),
   ('Bahçe Bahçeşehir',        'Konut', '/bahce-bahcesehir.jpg'),
   ('Lotus İstanbul',          'Konut', '/lotus-istanbul.jpg'),
   ('Flamingo Alkent',         'Konut', '/flamingo.jpg'),

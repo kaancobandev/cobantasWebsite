@@ -16,7 +16,7 @@ where a.title = b.title
 -- 2) Görsel yollarını yeni (ASCII) dosya adlarına güncelle
 update public.projects set cover_url = '/alemara.jpg'          where cover_url = '/alemara şantiyesi.jpg';
 update public.projects set cover_url = '/lotus-istanbul.jpg'   where cover_url = '/lotus istanbul son hal.jpg';
-update public.projects set cover_url = '/panorama-silivri.png' where cover_url = '/panorama silivri.png';
+update public.projects set cover_url = '/panorama-silivri.jpg' where cover_url = '/panorama silivri.png';
 
 -- Kontrol: kalan projeler ve kapak yolları
 select title, type, cover_url, created_at

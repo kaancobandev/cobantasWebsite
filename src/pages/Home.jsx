@@ -181,6 +181,8 @@ export default function Home() {
               <img
                 src="/lotus-istanbul.jpg"
                 alt="Çobantaş projesi"
+                loading="lazy"
+                decoding="async"
                 className="relative h-[58vh] w-full object-cover"
               />
               <div className="absolute -right-5 -top-5 hidden bg-bronze-600 p-6 text-white shadow-soft lg:block">

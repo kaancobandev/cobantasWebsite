@@ -77,6 +77,8 @@ export default function About() {
               <img
                 src="/pinnacle.jpg"
                 alt="Çobantaş projesi"
+                loading="lazy"
+                decoding="async"
                 className="relative h-[60vh] w-full object-cover"
               />
             </div>
