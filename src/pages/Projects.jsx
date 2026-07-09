@@ -4,6 +4,9 @@ import { ArrowUpRight, ArrowRight, ChevronRight } from 'lucide-react';
 import { Eyebrow } from '../components/ui';
 import useScrollReveal from '../hooks/useScrollReveal';
 import { useProjects } from '../hooks/useProjects';
+import { useLang } from '../context/LanguageContext';
+
+const ALL = '__all__';
 
 function SkeletonCard() {
   return (
@@ -18,28 +21,28 @@ function SkeletonCard() {
 }
 
 export default function Projects() {
+  const { t } = useLang();
   const { projects, loading } = useProjects();
   const [params, setParams] = useSearchParams();
-  const active = params.get('tur') || 'Tümü';
+  const active = params.get('tur') || ALL;
 
   const types = useMemo(
-    () => ['Tümü', ...Array.from(new Set(projects.map((p) => p.type).filter(Boolean)))],
+    () => [ALL, ...Array.from(new Set(projects.map((p) => p.type).filter(Boolean)))],
     [projects]
   );
   const filtered = useMemo(
-    () => (active === 'Tümü' ? projects : projects.filter((p) => p.type === active)),
+    () => (active === ALL ? projects : projects.filter((p) => p.type === active)),
     [projects, active]
   );
 
-  // Filtre değişince yeni kartlar için beliriş animasyonunu yeniden tetikle
   useScrollReveal([loading, active, filtered.length]);
 
   useEffect(() => {
-    document.title = 'Projeler | Çobantaş Gayrimenkul İnşaat';
+    document.title = `${t('projectsPage.breadcrumb')} | Çobantaş`;
     return () => { document.title = 'Çobantaş | Gayrimenkul & İnşaat'; };
-  }, []);
+  }, [t]);
 
-  const selectTab = (t) => setParams(t === 'Tümü' ? {} : { tur: t }, { replace: true });
+  const selectTab = (tab) => setParams(tab === ALL ? {} : { tur: tab }, { replace: true });
 
   return (
     <>
@@ -47,16 +50,16 @@ export default function Projects() {
       <section className="border-b border-stone-200 bg-stone-100">
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-20 lg:px-8">
           <nav className="mb-6 flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-widestx text-ink-400">
-            <Link to="/" className="transition-colors hover:text-bronze-700">Anasayfa</Link>
+            <Link to="/" className="transition-colors hover:text-bronze-700">{t('common.home')}</Link>
             <ChevronRight className="h-3 w-3 text-bronze-600" />
-            <span className="text-bronze-700">Projeler</span>
+            <span className="text-bronze-700">{t('projectsPage.breadcrumb')}</span>
           </nav>
-          <Eyebrow>Portföy</Eyebrow>
+          <Eyebrow>{t('projectsPage.eyebrow')}</Eyebrow>
           <h1 className="mt-6 max-w-3xl font-serif text-4xl leading-[1.1] text-ink-900 md:text-5xl lg:text-[3.4rem]">
-            Projelerimiz
+            {t('projectsPage.title')}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-500">
-            İstanbul ve çevresinde hayata geçirdiğimiz, kaliteyi ve estetiği bir araya getiren çalışmalarımızdan bir seçki.
+            {t('projectsPage.intro')}
           </p>
         </div>
       </section>
@@ -67,17 +70,17 @@ export default function Projects() {
           {/* Kategori sekmeleri */}
           {!loading && types.length > 1 && (
             <div className="mb-10 flex flex-wrap gap-2">
-              {types.map((t) => (
+              {types.map((tab) => (
                 <button
-                  key={t}
-                  onClick={() => selectTab(t)}
+                  key={tab}
+                  onClick={() => selectTab(tab)}
                   className={`border px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] transition-colors ${
-                    active === t
+                    active === tab
                       ? 'border-bronze-600 bg-bronze-600 text-white'
                       : 'border-stone-300 text-ink-600 hover:border-bronze-600 hover:text-bronze-700'
                   }`}
                 >
-                  {t}
+                  {tab === ALL ? t('projectsPage.all') : tab}
                 </button>
               ))}
             </div>
@@ -88,7 +91,7 @@ export default function Projects() {
               {Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)}
             </div>
           ) : filtered.length === 0 ? (
-            <p className="py-10 text-center text-ink-500">Bu kategoride henüz proje bulunmuyor.</p>
+            <p className="py-10 text-center text-ink-500">{t('projectsPage.empty')}</p>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {filtered.map((p, idx) => (
@@ -128,9 +131,9 @@ export default function Projects() {
 
           {/* CTA */}
           <div className="reveal mt-16 border-t border-stone-200 pt-12 text-center">
-            <h2 className="font-serif text-2xl text-ink-900 md:text-3xl">Aklınızdaki projeyi birlikte hayata geçirelim</h2>
+            <h2 className="font-serif text-2xl text-ink-900 md:text-3xl">{t('projectsPage.ctaHeading')}</h2>
             <Link to="/iletisim" className="group mt-7 inline-flex items-center gap-2.5 bg-bronze-600 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-bronze-700">
-              İletişime Geçin
+              {t('projectsPage.ctaBtn')}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>

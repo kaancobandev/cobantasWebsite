@@ -4,8 +4,10 @@ import { ChevronLeft, ChevronRight, ArrowLeft, ArrowRight, Ruler } from 'lucide-
 import { Eyebrow } from '../components/ui';
 import useScrollReveal from '../hooks/useScrollReveal';
 import { useProject } from '../hooks/useProjects';
+import { useLang } from '../context/LanguageContext';
 
 function Carousel({ images, title }) {
+  const { t } = useLang();
   const [i, setI] = useState(0);
   if (!images || images.length === 0) return null;
   const go = (n) => setI((prev) => (prev + n + images.length) % images.length);
@@ -13,21 +15,21 @@ function Carousel({ images, title }) {
   return (
     <div className="relative overflow-hidden bg-ink-900">
       <div className="aspect-[16/9] w-full">
-        <img src={images[i]} alt={`${title} — görsel ${i + 1}`} className="h-full w-full object-cover" />
+        <img src={images[i]} alt={`${title} — ${t('detail.image')} ${i + 1}`} className="h-full w-full object-cover" />
       </div>
       {images.length > 1 && (
         <>
-          <button onClick={() => go(-1)} aria-label="Önceki"
+          <button onClick={() => go(-1)} aria-label={t('detail.prev')}
             className="absolute left-4 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center bg-white/85 text-ink-900 transition-colors hover:bg-bronze-600 hover:text-white">
             <ChevronLeft className="h-5 w-5" />
           </button>
-          <button onClick={() => go(1)} aria-label="Sonraki"
+          <button onClick={() => go(1)} aria-label={t('detail.next')}
             className="absolute right-4 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center bg-white/85 text-ink-900 transition-colors hover:bg-bronze-600 hover:text-white">
             <ChevronRight className="h-5 w-5" />
           </button>
           <div className="absolute inset-x-0 bottom-4 flex justify-center gap-2">
             {images.map((_, idx) => (
-              <button key={idx} onClick={() => setI(idx)} aria-label={`Görsel ${idx + 1}`}
+              <button key={idx} onClick={() => setI(idx)} aria-label={`${t('detail.image')} ${idx + 1}`}
                 className={`h-2 w-2 rounded-full transition-colors ${idx === i ? 'bg-bronze-500' : 'bg-white/50 hover:bg-white'}`} />
             ))}
           </div>
@@ -38,6 +40,7 @@ function Carousel({ images, title }) {
 }
 
 export default function ProjectDetail() {
+  const { t } = useLang();
   const { id } = useParams();
   const { project, loading } = useProject(id);
   useScrollReveal([loading]);
@@ -65,9 +68,9 @@ export default function ProjectDetail() {
   if (!project) {
     return (
       <div className="mx-auto max-w-3xl px-6 py-32 text-center">
-        <h1 className="font-serif text-3xl text-ink-900">Proje bulunamadı</h1>
+        <h1 className="font-serif text-3xl text-ink-900">{t('detail.notFound')}</h1>
         <Link to="/projeler" className="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-bronze-700">
-          <ArrowLeft className="h-4 w-4" /> Tüm Projeler
+          <ArrowLeft className="h-4 w-4" /> {t('detail.all')}
         </Link>
       </div>
     );
@@ -79,9 +82,9 @@ export default function ProjectDetail() {
       <section className="border-b border-stone-200 bg-stone-100">
         <div className="mx-auto max-w-5xl px-6 py-14 md:py-16 lg:px-8">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-widestx text-ink-400">
-            <Link to="/" className="transition-colors hover:text-bronze-700">Anasayfa</Link>
+            <Link to="/" className="transition-colors hover:text-bronze-700">{t('common.home')}</Link>
             <ChevronRight className="h-3 w-3 text-bronze-600" />
-            <Link to="/projeler" className="transition-colors hover:text-bronze-700">Projeler</Link>
+            <Link to="/projeler" className="transition-colors hover:text-bronze-700">{t('projectsPage.breadcrumb')}</Link>
             <ChevronRight className="h-3 w-3 text-bronze-600" />
             <span className="text-bronze-700">{project.title}</span>
           </nav>
@@ -116,7 +119,7 @@ export default function ProjectDetail() {
           {/* Carousel galeri */}
           {project.images?.length > 0 && (
             <div className="reveal mt-16">
-              <div className="mb-6"><Eyebrow>Galeri</Eyebrow></div>
+              <div className="mb-6"><Eyebrow>{t('detail.gallery')}</Eyebrow></div>
               <Carousel images={project.images} title={project.title} />
             </div>
           )}
@@ -124,10 +127,10 @@ export default function ProjectDetail() {
           {/* Alt gezinme */}
           <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-stone-200 pt-10">
             <Link to="/projeler" className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-ink-600 transition-colors hover:text-bronze-700">
-              <ArrowLeft className="h-4 w-4" /> Tüm Projeler
+              <ArrowLeft className="h-4 w-4" /> {t('detail.all')}
             </Link>
             <Link to="/iletisim" className="group inline-flex items-center gap-2.5 bg-bronze-600 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-bronze-700">
-              İletişime Geçin
+              {t('detail.contactBtn')}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>

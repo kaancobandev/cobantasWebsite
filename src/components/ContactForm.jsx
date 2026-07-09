@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { useLang } from '../context/LanguageContext';
 
 const FORM_NAME = 'iletisim';
 
@@ -11,9 +12,10 @@ function encode(data) {
 }
 
 // İletişim formu — hem ana sayfada hem İletişim sayfasında kullanılır.
-// Gönderim Netlify Forms üzerinden info@cobantas.com'a iletilir (Netlify panelinde
-// e-posta bildirimi ayarlanır). Gerçek gönderim yalnızca canlı Netlify sitesinde çalışır.
+// Gönderim Netlify Forms üzerinden info@cobantas.com'a iletilir. Alan "name"leri
+// (index.html'deki gizli formla eşleşmeli) DEĞİŞTİRİLMEMELİDİR; yalnızca etiketler çevrilir.
 export default function ContactForm() {
+  const { t } = useLang();
   const [status, setStatus] = useState('idle'); // idle | submitting | success | error
   const [form, setForm] = useState({ ad: '', soyad: '', email: '', telefon: '', aciklama: '' });
   const [botField, setBotField] = useState('');
@@ -45,18 +47,16 @@ export default function ContactForm() {
         <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-bronze-600 text-white">
           <CheckCircle2 className="h-7 w-7" strokeWidth={1.75} />
         </div>
-        <h3 className="mt-6 font-serif text-2xl text-ink-900">Talebiniz alındı</h3>
-        <p className="mt-2 text-sm leading-relaxed text-ink-500">
-          En kısa sürede sizinle iletişime geçeceğiz. Bize ulaştığınız için teşekkür ederiz.
-        </p>
+        <h3 className="mt-6 font-serif text-2xl text-ink-900">{t('form.successTitle')}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-ink-500">{t('form.successBody')}</p>
       </div>
     );
   }
 
   return (
     <div className="border border-stone-200 bg-white p-8 shadow-soft md:p-10">
-      <h3 className="font-serif text-2xl text-ink-900">Talep gönderin</h3>
-      <p className="mt-2 text-sm text-ink-500">Formu doldurun, ekibimiz sizinle iletişime geçsin.</p>
+      <h3 className="font-serif text-2xl text-ink-900">{t('form.title')}</h3>
+      <p className="mt-2 text-sm text-ink-500">{t('form.subtitle')}</p>
       <form
         name={FORM_NAME}
         method="POST"
@@ -69,38 +69,35 @@ export default function ContactForm() {
         <input type="hidden" name="form-name" value={FORM_NAME} />
         <p className="hidden">
           <label>
-            Bu alanı boş bırakın:
             <input name="bot-field" value={botField} onChange={(e) => setBotField(e.target.value)} />
           </label>
         </p>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
-            <label htmlFor="cf-ad" className={label}>Ad</label>
+            <label htmlFor="cf-ad" className={label}>{t('form.ad')}</label>
             <input id="cf-ad" type="text" name="ad" value={form.ad} onChange={onChange} required className={field} />
           </div>
           <div>
-            <label htmlFor="cf-soyad" className={label}>Soyad</label>
+            <label htmlFor="cf-soyad" className={label}>{t('form.soyad')}</label>
             <input id="cf-soyad" type="text" name="soyad" value={form.soyad} onChange={onChange} required className={field} />
           </div>
         </div>
         <div>
-          <label htmlFor="cf-email" className={label}>E-Posta</label>
+          <label htmlFor="cf-email" className={label}>{t('form.email')}</label>
           <input id="cf-email" type="email" name="email" value={form.email} onChange={onChange} required className={field} />
         </div>
         <div>
-          <label htmlFor="cf-telefon" className={label}>Telefon</label>
+          <label htmlFor="cf-telefon" className={label}>{t('form.telefon')}</label>
           <input id="cf-telefon" type="tel" name="telefon" value={form.telefon} onChange={onChange} className={field} />
         </div>
         <div>
-          <label htmlFor="cf-aciklama" className={label}>Açıklama</label>
+          <label htmlFor="cf-aciklama" className={label}>{t('form.aciklama')}</label>
           <textarea id="cf-aciklama" name="aciklama" rows="4" value={form.aciklama} onChange={onChange} required className={field} />
         </div>
 
         {status === 'error' && (
-          <p className="border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-            Gönderilirken bir sorun oluştu. Lütfen tekrar deneyin veya doğrudan info@cobantas.com adresine yazın.
-          </p>
+          <p className="border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{t('form.error')}</p>
         )}
 
         <button
@@ -108,7 +105,7 @@ export default function ContactForm() {
           disabled={status === 'submitting'}
           className="group flex w-full items-center justify-center gap-3 bg-bronze-600 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-bronze-700 disabled:opacity-60"
         >
-          {status === 'submitting' ? 'Gönderiliyor…' : 'Talep Gönder'}
+          {status === 'submitting' ? t('form.submitting') : t('form.submit')}
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </button>
       </form>

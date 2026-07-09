@@ -2,17 +2,20 @@ import { useState, useEffect } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { Phone, Mail, MapPin, Menu, X, ChevronRight } from 'lucide-react';
 import { socialIcons } from './ui';
+import LangToggle from './LangToggle';
 import { socials, contactInfo } from '../data/site';
+import { useLang } from '../context/LanguageContext';
 
 // "to" olanlar ayrı sayfaya (router), "href" olanlar ana sayfadaki bölüme (/#id) gider
 const navItems = [
-  { name: 'Hakkımızda', to: '/hakkimizda' },
-  { name: 'Uzmanlık', href: '/#services' },
-  { name: 'Projeler', to: '/projeler' },
-  { name: 'İletişim', to: '/iletisim' },
+  { key: 'nav.about', to: '/hakkimizda' },
+  { key: 'nav.expertise', href: '/#services' },
+  { key: 'nav.projects', to: '/projeler' },
+  { key: 'nav.contact', to: '/iletisim' },
 ];
 
 export default function Layout() {
+  const { t } = useLang();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { pathname, hash } = useLocation();
@@ -41,7 +44,7 @@ export default function Layout() {
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-bronze-600 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
       >
-        İçeriğe geç
+        {t('common.skip')}
       </a>
 
       {/* Üst bilgi çubuğu */}
@@ -50,10 +53,11 @@ export default function Layout() {
           <div className="flex gap-7 text-ink-500">
             <span className="flex items-center gap-2"><Phone className="h-3.5 w-3.5 text-bronze-600" strokeWidth={1.75} /> {contactInfo.phoneDisplay}</span>
             <span className="flex items-center gap-2"><Mail className="h-3.5 w-3.5 text-bronze-600" strokeWidth={1.75} /> {contactInfo.email}</span>
-            <span className="flex items-center gap-2"><MapPin className="h-3.5 w-3.5 text-bronze-600" strokeWidth={1.75} /> Küçükçekmece, İstanbul</span>
+            <span className="flex items-center gap-2"><MapPin className="h-3.5 w-3.5 text-bronze-600" strokeWidth={1.75} /> {t('common.location')}</span>
           </div>
-          <div className="flex items-center gap-4 text-ink-400">
+          <div className="flex items-center gap-5 text-ink-400">
             <a href="https://instagram.com/cobantas_fksy" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition-colors hover:text-bronze-600"><InstagramIcon className="h-4 w-4" /></a>
+            <LangToggle />
           </div>
         </div>
       </div>
@@ -72,7 +76,7 @@ export default function Layout() {
               <div className="flex flex-col leading-none">
                 <span className="text-xl font-bold tracking-tight text-ink-900">ÇOBANTAŞ</span>
                 <span className="mt-1 text-[0.6rem] font-semibold uppercase tracking-widestx text-bronze-600">
-                  Gayrimenkul İnşaat
+                  {t('brand.subtitle')}
                 </span>
               </div>
             </Link>
@@ -82,7 +86,7 @@ export default function Layout() {
               {navItems.map((item) =>
                 item.to ? (
                   <NavLink
-                    key={item.name}
+                    key={item.key}
                     to={item.to}
                     className={({ isActive }) =>
                       `group relative text-xs font-semibold uppercase tracking-[0.18em] transition-colors hover:text-ink-900 ${
@@ -90,16 +94,16 @@ export default function Layout() {
                       }`
                     }
                   >
-                    {item.name}
+                    {t(item.key)}
                     <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-bronze-600 transition-all duration-300 group-hover:w-full" />
                   </NavLink>
                 ) : (
                   <a
-                    key={item.name}
+                    key={item.key}
                     href={item.href}
                     className="group relative text-xs font-semibold uppercase tracking-[0.18em] text-ink-600 transition-colors hover:text-ink-900"
                   >
-                    {item.name}
+                    {t(item.key)}
                     <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-bronze-600 transition-all duration-300 group-hover:w-full" />
                   </a>
                 )
@@ -108,15 +112,16 @@ export default function Layout() {
                 to="/iletisim"
                 className="border border-ink-900/15 px-5 py-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-ink-800 transition-colors hover:border-bronze-600 hover:bg-bronze-600 hover:text-white"
               >
-                Teklif Alın
+                {t('nav.quote')}
               </Link>
+              <span className="hidden lg:block"><LangToggle /></span>
             </div>
 
             {/* Mobil menü butonu */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-ink-900 transition-colors hover:text-bronze-600 md:hidden"
-              aria-label="Menü"
+              aria-label="Menu"
               aria-expanded={mobileMenuOpen}
               aria-controls="mobil-menu"
             >
@@ -132,21 +137,21 @@ export default function Layout() {
               {navItems.map((item) =>
                 item.to ? (
                   <Link
-                    key={item.name}
+                    key={item.key}
                     to={item.to}
                     onClick={closeMenu}
                     className="block border-b border-white/10 px-1 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-stone-300 transition-colors hover:text-bronze-300"
                   >
-                    {item.name}
+                    {t(item.key)}
                   </Link>
                 ) : (
                   <a
-                    key={item.name}
+                    key={item.key}
                     href={item.href}
                     onClick={closeMenu}
                     className="block border-b border-white/10 px-1 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-stone-300 transition-colors hover:text-bronze-300"
                   >
-                    {item.name}
+                    {t(item.key)}
                   </a>
                 )
               )}
@@ -155,8 +160,9 @@ export default function Layout() {
                 onClick={closeMenu}
                 className="mt-4 block bg-bronze-600 px-4 py-3.5 text-center text-sm font-semibold uppercase tracking-[0.18em] text-white"
               >
-                Teklif Alın
+                {t('nav.quote')}
               </Link>
+              <div className="pt-4"><LangToggle variant="dark" /></div>
             </div>
           </div>
         )}
@@ -178,11 +184,11 @@ export default function Layout() {
                 </span>
                 <div className="flex flex-col leading-none">
                   <span className="text-xl font-bold tracking-tight text-white">ÇOBANTAŞ</span>
-                  <span className="mt-1 text-[0.6rem] font-semibold uppercase tracking-widestx text-bronze-500">Gayrimenkul İnşaat</span>
+                  <span className="mt-1 text-[0.6rem] font-semibold uppercase tracking-widestx text-bronze-500">{t('brand.subtitle')}</span>
                 </div>
               </div>
               <p className="max-w-md text-sm leading-relaxed text-stone-400">
-                Tavizsiz yapısal bütünlük ve kurumsal yenilikçilikle yarının temellerini bugünden inşa ediyoruz.
+                {t('footer.tagline')}
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 {socials.map((s) => {
@@ -205,41 +211,41 @@ export default function Layout() {
             </div>
 
             <div>
-              <h4 className="mb-6 text-[0.7rem] font-semibold uppercase tracking-widestx text-white">Kurumsal</h4>
+              <h4 className="mb-6 text-[0.7rem] font-semibold uppercase tracking-widestx text-white">{t('footer.corporate')}</h4>
               <ul className="space-y-3.5 text-sm">
                 <li>
                   <Link to="/hakkimizda" className="flex items-center gap-2 transition-colors hover:text-bronze-400">
                     <ChevronRight className="h-3 w-3 text-bronze-600" />
-                    Hakkımızda
+                    {t('nav.about')}
                   </Link>
                 </li>
                 <li>
                   <Link to="/projeler" className="flex items-center gap-2 transition-colors hover:text-bronze-400">
                     <ChevronRight className="h-3 w-3 text-bronze-600" />
-                    Projeler
+                    {t('nav.projects')}
                   </Link>
                 </li>
                 <li>
                   <Link to="/hakkimizda" className="flex items-center gap-2 transition-colors hover:text-bronze-400">
                     <ChevronRight className="h-3 w-3 text-bronze-600" />
-                    Vizyon & Misyon
+                    {t('footer.vizyonMisyon')}
                   </Link>
                 </li>
                 <li>
                   <Link to="/iletisim" className="flex items-center gap-2 transition-colors hover:text-bronze-400">
                     <ChevronRight className="h-3 w-3 text-bronze-600" />
-                    İletişim
+                    {t('nav.contact')}
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h4 className="mb-6 text-[0.7rem] font-semibold uppercase tracking-widestx text-white">İletişim</h4>
+              <h4 className="mb-6 text-[0.7rem] font-semibold uppercase tracking-widestx text-white">{t('footer.contact')}</h4>
               <ul className="space-y-3.5 text-sm">
                 <li className="flex items-start gap-2">
                   <MapPin className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-bronze-600" />
-                  <span>Küçükçekmece / İstanbul</span>
+                  <span>{t('common.location')}</span>
                 </li>
                 <li>
                   <a href={contactInfo.phoneHref} className="flex items-center gap-2 transition-colors hover:text-bronze-400">
@@ -258,7 +264,7 @@ export default function Layout() {
           </div>
 
           <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-center text-xs tracking-wide md:flex-row md:text-left">
-            <p>&copy; {new Date().getFullYear()} Çobantaş Gayrimenkul İnşaat. Tüm hakları saklıdır.</p>
+            <p>&copy; {new Date().getFullYear()} Çobantaş {t('brand.subtitle')}. {t('footer.rights')}</p>
             <a href={contactInfo.emailHref} className="transition-colors hover:text-white">{contactInfo.email}</a>
           </div>
         </div>
@@ -270,7 +276,7 @@ export default function Layout() {
           href={whatsapp.href}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="WhatsApp ile yazın"
+          aria-label="WhatsApp"
           className="fixed bottom-5 right-5 z-40 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-105"
         >
           <WhatsappIcon className="h-7 w-7" />

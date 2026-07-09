@@ -12,20 +12,8 @@ import CountUp from '../components/CountUp';
 import HeroSlideshow from '../components/HeroSlideshow';
 import useScrollReveal from '../hooks/useScrollReveal';
 import { useProjects } from '../hooks/useProjects';
-
-const stats = [
-  { label: 'Yıllık Tecrübe', value: '30+' },
-  { label: 'Uzman Kadro', value: '150+' },
-  { label: 'Tamamlanan Proje', value: '30+' },
-  { label: 'İş Ortağı', value: '20+' },
-];
-
-const services = [
-  { icon: Building2, title: 'Mimari Vizyon', desc: 'Sadece binalar inşa etmiyor; modern zarafetin fonksiyonellikle buluştuğu, bulunduğu çevreye değer katan prestijli yaşam alanları yaratıyoruz.' },
-  { icon: Ruler, title: 'Kusursuz Mühendislik', desc: 'Statik güvenlikten en ince dekorasyon detayına kadar, alanında uzman ekiplerle çalışarak vizyonu hatasız bir gerçeğe dönüştürüyoruz.' },
-  { icon: HardHat, title: 'Proje Yönetimi', desc: 'Süreçleri mutlak şeffaflıkla yönetiyor, planlamadan teslime kadar her adımı titizlikle denetleyerek kalite standardımızdan ödün vermiyoruz.' },
-  { icon: Hammer, title: 'Tavizsiz İşçilik', desc: 'Her metrekarede, estetiği ve sarsılmaz dayanıklılığı garanti eden birinci sınıf, endüstri standartlarının üzerindeki malzemeleri tercih ediyoruz.' },
-];
+import { useLang } from '../context/LanguageContext';
+import { contactInfo } from '../data/site';
 
 const partners = [
   { name: 'Batı Yapı', src: '/logos/bati-yapi.png' },
@@ -40,20 +28,13 @@ const partners = [
   { name: 'Irmaklar', src: '/logos/irmaklar.png' },
 ];
 
-const values = [
-  'Tavizsiz İş Güvenliği',
-  'Gelişmiş Yapısal Mühendislik',
-  'Zaman Çizelgesine Sıkı Uyum',
-  'Sürdürülebilir ve Çevre Dostu Uygulamalar',
-];
-
-const activityLines = [
-  { icon: Factory, type: 'Fabrika', title: 'Fabrika & Endüstriyel Yapılar', desc: 'Üretim tesisleri, depo ve endüstriyel yapıların projelendirilmesi ve anahtar teslim inşası.' },
-  { icon: Building2, type: 'Konut', title: 'Konut Projeleri', desc: 'Modern mimari ile yüksek yaşam kalitesini buluşturan prestijli konut projeleri.' },
-  { icon: ClipboardCheck, type: 'Taahhüt', title: 'Taahhüt İşleri', desc: 'Planlamadan teslime kadar uçtan uca yönetilen anahtar teslim taahhüt hizmetleri.' },
-];
+// İkonlar (ve faaliyet türleri) kodda; metinler çeviriden gelir
+const serviceIcons = [Building2, Ruler, HardHat, Hammer];
+const activityIcons = [Factory, Building2, ClipboardCheck];
+const activityTypes = ['Fabrika', 'Konut', 'Taahhüt'];
 
 export default function Home() {
+  const { t } = useLang();
   const { projects } = useProjects();
   useScrollReveal([projects.length]);
 
@@ -65,6 +46,16 @@ export default function Home() {
       : ['https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=80'];
   }, [projects]);
 
+  const stats = t('home.stats');
+  const services = t('home.services.items');
+  const activity = t('home.activity.items');
+  const values = t('home.about.values');
+  const contactItems = [
+    { icon: MapPin, label: t('home.contact.addressLabel'), value: contactInfo.address },
+    { icon: Phone, label: t('home.contact.phoneLabel'), value: contactInfo.phoneDisplay },
+    { icon: Mail, label: t('home.contact.emailLabel'), value: contactInfo.email },
+  ];
+
   return (
     <>
       {/* Hero */}
@@ -73,29 +64,29 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid min-h-[88vh] items-center gap-12 py-16 lg:grid-cols-12 lg:gap-10 lg:py-0">
             <div className="lg:col-span-6 lg:pr-6">
-              <Eyebrow>Güvenle Yükselen</Eyebrow>
+              <Eyebrow>{t('home.hero.eyebrow')}</Eyebrow>
               <h1 className="mt-7 font-serif text-[2.6rem] leading-[1.07] text-ink-900 sm:text-5xl lg:text-[3.85rem]">
-                Vizyonu gerçeğe,<br />
-                gerçeği <span className="italic text-bronze-700">mükemmelliğe</span><br />
-                dönüştürüyoruz.
+                {t('home.hero.titlePre')}{' '}
+                <span className="italic text-bronze-700">{t('home.hero.titleAccent')}</span>
+                {t('home.hero.titlePost')}
               </h1>
               <p className="mt-8 max-w-xl text-lg leading-relaxed text-ink-500">
-                Sarsılmaz dayanıklılık ve yenilikçi mühendislik. Köklü saha tecrübemiz ve tavizsiz iş ahlakımızla projelerinizi temelden çatıya eksiksiz yönetiyor, söz verdiğimiz zamanda teslim ediyoruz.
+                {t('home.hero.lead')}
               </p>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <a href="#projects" className="group flex items-center justify-center gap-3 bg-bronze-600 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-bronze-700">
-                  Projelerimize Göz Atın
+                  {t('home.hero.btnProjects')}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
                 <Link to="/hakkimizda" className="flex items-center justify-center border border-ink-900/20 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-ink-800 transition-colors hover:border-bronze-600 hover:text-bronze-700">
-                  Hakkımızda
+                  {t('home.hero.btnAbout')}
                 </Link>
               </div>
               <div className="mt-11 flex flex-wrap items-center gap-x-7 gap-y-3 text-xs font-medium text-ink-500">
-                {['Kurumsal Güvence', 'Zamanında Teslim', 'Tavizsiz Kalite'].map((t) => (
-                  <span key={t} className="flex items-center gap-2.5">
+                {t('home.hero.trust').map((item) => (
+                  <span key={item} className="flex items-center gap-2.5">
                     <span className="h-1.5 w-1.5 rotate-45 bg-bronze-600" />
-                    {t}
+                    {item}
                   </span>
                 ))}
               </div>
@@ -110,8 +101,8 @@ export default function Home() {
                 </div>
                 <div className="absolute -bottom-6 -left-6 hidden bg-white p-6 shadow-soft lg:block">
                   <div className="font-serif text-5xl leading-none text-ink-900">30+</div>
-                  <div className="mt-2 text-[0.65rem] font-semibold uppercase tracking-widestx text-bronze-700">
-                    Yıl Saha<br />Tecrübesi
+                  <div className="mt-2 whitespace-pre-line text-[0.65rem] font-semibold uppercase tracking-widestx text-bronze-700">
+                    {t('home.hero.badgeLabel')}
                   </div>
                 </div>
               </div>
@@ -144,30 +135,33 @@ export default function Home() {
       <section className="py-20 md:py-28 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mb-14 max-w-2xl">
-            <Eyebrow>Faaliyet Alanlarımız</Eyebrow>
+            <Eyebrow>{t('home.activity.eyebrow')}</Eyebrow>
             <h2 className="mt-6 font-serif text-3xl leading-tight text-ink-900 md:text-[2.7rem]">
-              Uzmanlaştığımız alanlar
+              {t('home.activity.heading')}
             </h2>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
-            {activityLines.map((a, idx) => (
-              <Link
-                key={idx}
-                to={`/projeler?tur=${encodeURIComponent(a.type)}`}
-                className="reveal group flex flex-col border border-stone-200 bg-white p-9 transition-all duration-300 hover:-translate-y-1 hover:border-bronze-300 hover:shadow-card"
-                style={{ transitionDelay: `${idx * 80}ms` }}
-              >
-                <div className="grid h-14 w-14 place-items-center bg-stone-100 text-bronze-600 transition-colors group-hover:bg-bronze-600 group-hover:text-white">
-                  <a.icon className="h-7 w-7" strokeWidth={1.25} />
-                </div>
-                <h3 className="mt-7 font-serif text-xl text-ink-900">{a.title}</h3>
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-ink-500">{a.desc}</p>
-                <span className="mt-6 inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-bronze-700">
-                  Projeleri Gör
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
-              </Link>
-            ))}
+            {activity.map((a, idx) => {
+              const Icon = activityIcons[idx];
+              return (
+                <Link
+                  key={idx}
+                  to={`/projeler?tur=${encodeURIComponent(activityTypes[idx])}`}
+                  className="reveal group flex flex-col border border-stone-200 bg-white p-9 transition-all duration-300 hover:-translate-y-1 hover:border-bronze-300 hover:shadow-card"
+                  style={{ transitionDelay: `${idx * 80}ms` }}
+                >
+                  <div className="grid h-14 w-14 place-items-center bg-stone-100 text-bronze-600 transition-colors group-hover:bg-bronze-600 group-hover:text-white">
+                    <Icon className="h-7 w-7" strokeWidth={1.25} />
+                  </div>
+                  <h3 className="mt-7 font-serif text-xl text-ink-900">{a.title}</h3>
+                  <p className="mt-4 flex-1 text-sm leading-relaxed text-ink-500">{a.desc}</p>
+                  <span className="mt-6 inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-bronze-700">
+                    {t('home.activity.cta')}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -180,26 +174,26 @@ export default function Home() {
               <div className="absolute -inset-3 hidden border border-bronze-300/60 lg:block" />
               <img
                 src="/lotus-istanbul.jpg"
-                alt="Çobantaş projesi"
+                alt="Çobantaş"
                 loading="lazy"
                 decoding="async"
                 className="relative h-[58vh] w-full object-cover"
               />
               <div className="absolute -right-5 -top-5 hidden bg-bronze-600 p-6 text-white shadow-soft lg:block">
                 <ShieldCheck className="h-9 w-9" strokeWidth={1.25} />
-                <div className="mt-3 text-[0.65rem] font-semibold uppercase tracking-widestx">
-                  Kurumsal<br />Standartlar
+                <div className="mt-3 whitespace-pre-line text-[0.65rem] font-semibold uppercase tracking-widestx">
+                  {t('brand.subtitle')}
                 </div>
               </div>
             </div>
 
             <div className="reveal order-1 lg:order-2">
-              <Eyebrow>Şirket Profili</Eyebrow>
+              <Eyebrow>{t('home.about.eyebrow')}</Eyebrow>
               <h2 className="mt-6 font-serif text-3xl leading-tight text-ink-900 md:text-[2.7rem]">
-                Mimari vizyon ile titiz mühendisliğin kesiştiği nokta
+                {t('home.about.heading')}
               </h2>
               <p className="mt-7 text-lg leading-relaxed text-ink-500">
-                Çobantaş olarak biz sadece yapılar inşa etmiyoruz; müşterilerimizin kurumsal başarısını yönlendiren, nesiller boyu ayakta kalacak fiziksel değerler oluşturuyoruz. Her projede şeffaflık, dayanıklılık ve en yüksek kalite standartlarını esas alıyoruz.
+                {t('home.about.paragraph')}
               </p>
 
               <div className="mt-10 grid gap-x-8 gap-y-5 sm:grid-cols-2">
@@ -212,7 +206,7 @@ export default function Home() {
               </div>
 
               <Link to="/hakkimizda" className="group mt-11 inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-bronze-700">
-                Hakkımızda Sayfasını İnceleyin
+                {t('home.about.cta')}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
@@ -225,32 +219,35 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mb-14 flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
             <div className="max-w-2xl">
-              <Eyebrow>Bölümler &amp; Uzmanlık</Eyebrow>
+              <Eyebrow>{t('home.services.eyebrow')}</Eyebrow>
               <h2 className="mt-6 font-serif text-3xl leading-tight text-ink-900 md:text-[2.7rem]">
-                Kapsamlı uzmanlığımız
+                {t('home.services.heading')}
               </h2>
             </div>
             <p className="max-w-md border-l-2 border-bronze-600 pl-5 text-ink-500">
-              Sektördeki derin uzmanlığımızla, farklı ölçeklerde çok disiplinli inşaat programlarını uçtan uca yürütüyoruz.
+              {t('home.services.intro')}
             </p>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((service, idx) => (
-              <div
-                key={idx}
-                className="reveal group relative border border-stone-200 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-bronze-300 hover:shadow-card"
-                style={{ transitionDelay: `${idx * 80}ms` }}
-              >
-                <span className="absolute right-6 top-5 font-serif text-4xl text-stone-200 transition-colors group-hover:text-bronze-200">
-                  0{idx + 1}
-                </span>
-                <service.icon className="h-9 w-9 text-bronze-600" strokeWidth={1.25} />
-                <h4 className="mt-7 font-serif text-xl text-ink-900">{service.title}</h4>
-                <p className="mt-4 text-sm leading-relaxed text-ink-500">{service.desc}</p>
-                <div className="mt-7 h-px w-8 bg-bronze-600 transition-all duration-300 group-hover:w-16" />
-              </div>
-            ))}
+            {services.map((service, idx) => {
+              const Icon = serviceIcons[idx];
+              return (
+                <div
+                  key={idx}
+                  className="reveal group relative border border-stone-200 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-bronze-300 hover:shadow-card"
+                  style={{ transitionDelay: `${idx * 80}ms` }}
+                >
+                  <span className="absolute right-6 top-5 font-serif text-4xl text-stone-200 transition-colors group-hover:text-bronze-200">
+                    0{idx + 1}
+                  </span>
+                  <Icon className="h-9 w-9 text-bronze-600" strokeWidth={1.25} />
+                  <h4 className="mt-7 font-serif text-xl text-ink-900">{service.title}</h4>
+                  <p className="mt-4 text-sm leading-relaxed text-ink-500">{service.desc}</p>
+                  <div className="mt-7 h-px w-8 bg-bronze-600 transition-all duration-300 group-hover:w-16" />
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -259,10 +256,10 @@ export default function Home() {
       <section id="projects" className="bg-ink-950 py-20 text-white md:py-28 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <Eyebrow center light>Tamamlanan Çalışmalar</Eyebrow>
-            <h2 className="mt-6 font-serif text-3xl text-white md:text-[2.7rem]">Seçkin projelerimiz</h2>
+            <Eyebrow center light>{t('home.projects.eyebrow')}</Eyebrow>
+            <h2 className="mt-6 font-serif text-3xl text-white md:text-[2.7rem]">{t('home.projects.heading')}</h2>
             <p className="mx-auto mt-5 max-w-xl text-stone-400">
-              İstanbul ve çevresinde hayata geçirdiğimiz, kaliteyi ve estetiği bir araya getiren yapılarımızdan bir seçki.
+              {t('home.projects.intro')}
             </p>
           </div>
 
@@ -277,6 +274,8 @@ export default function Home() {
                 <img
                   src={project.cover_url}
                   alt={project.title}
+                  loading="lazy"
+                  decoding="async"
                   className="absolute inset-0 h-full w-full object-cover opacity-80 transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-100"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/25 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-75" />
@@ -297,7 +296,7 @@ export default function Home() {
 
           <div className="reveal mt-12 text-center">
             <Link to="/projeler" className="group inline-flex items-center gap-2.5 border border-white/25 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:border-bronze-400 hover:text-bronze-300">
-              Tüm Projeler
+              {t('home.projects.all')}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
@@ -308,9 +307,9 @@ export default function Home() {
       <section id="partners" className="border-b border-stone-200 bg-stone-50 py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="reveal mb-14 text-center">
-            <Eyebrow center>İş Ortaklarımız</Eyebrow>
+            <Eyebrow center>{t('home.partners.eyebrow')}</Eyebrow>
             <h2 className="mt-6 font-serif text-3xl text-ink-900 md:text-4xl">
-              Güvenle birlikte yükseldiğimiz kurumlar
+              {t('home.partners.heading')}
             </h2>
           </div>
           <div className="reveal grid grid-cols-2 items-center gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-5">
@@ -335,20 +334,16 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
             <div className="reveal">
-              <Eyebrow>İletişim</Eyebrow>
+              <Eyebrow>{t('home.contact.eyebrow')}</Eyebrow>
               <h2 className="mt-6 font-serif text-3xl leading-tight text-ink-900 md:text-[2.7rem]">
-                Bir sonraki projenizi konuşalım
+                {t('home.contact.heading')}
               </h2>
               <p className="mt-7 max-w-lg text-lg leading-relaxed text-ink-500">
-                Uzman mühendislik danışmanlığı veya proje yönetimi hizmetlerine mi ihtiyacınız var? Talebinizi kurumsal ekibimize iletin, en kısa sürede yanıt verelim.
+                {t('home.contact.paragraph')}
               </p>
 
               <div className="mt-12 space-y-6">
-                {[
-                  { icon: MapPin, label: 'Adresimiz', value: 'Atatürk Mah. Komsan Üstü Yolu Cad. Residance Quality No:4 İç Kapı No:211 Küçükçekmece / İstanbul' },
-                  { icon: Phone, label: 'Telefon', value: '+90 (532) 524 41 93' },
-                  { icon: Mail, label: 'E-Posta', value: 'info@cobantas.com' },
-                ].map((c, idx) => (
+                {contactItems.map((c, idx) => (
                   <div key={idx} className="flex items-start gap-5">
                     <span className="grid h-12 w-12 flex-shrink-0 place-items-center border border-stone-200 bg-white text-bronze-600">
                       <c.icon className="h-5 w-5" strokeWidth={1.5} />
