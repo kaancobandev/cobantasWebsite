@@ -133,7 +133,7 @@ export default function Home() {
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/40 via-ink-950/5 to-transparent" />
                 </div>
                 <div className="absolute -bottom-6 -left-6 hidden bg-white p-6 shadow-soft lg:block">
-                  <div className="font-serif text-5xl leading-none text-ink-900">30+</div>
+                  <div className="font-serif text-5xl leading-none text-ink-900">21+</div>
                   <div className="mt-2 whitespace-pre-line text-[0.65rem] font-semibold uppercase tracking-widestx text-bronze-700">
                     {t('home.hero.badgeLabel')}
                   </div>

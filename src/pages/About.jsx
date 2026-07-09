@@ -12,7 +12,7 @@ import { useLang } from '../context/LanguageContext';
 
 const valueIcons = [ShieldCheck, Gem, Scale, Handshake, Leaf, Lightbulb];
 const activityIcons = [Factory, Building2, ClipboardCheck];
-const statValues = ['30+', '150+', '30+', '20+'];
+const statValues = ['21+', '400+', '60+', '120+'];
 
 export default function About() {
   const { t } = useLang();
@@ -75,7 +75,7 @@ export default function About() {
 
               <div className="mt-9 grid grid-cols-3 gap-6 border-t border-stone-200 pt-7">
                 <div>
-                  <div className="font-serif text-3xl text-ink-900">1995</div>
+                  <div className="font-serif text-3xl text-ink-900">2005</div>
                   <div className="mt-1 text-[0.65rem] font-semibold uppercase tracking-widestx text-bronze-700">{t('about.founded')}</div>
                 </div>
                 <div>
