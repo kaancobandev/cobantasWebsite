@@ -129,12 +129,14 @@ export default function ProjectDetail() {
             ].filter((s) => s.value);
             if (specs.length === 0) return null;
             return (
-              <div className="reveal mx-auto mt-14 max-w-3xl border-y border-stone-200">
-                <dl className="grid grid-cols-1 divide-y divide-stone-200 sm:grid-cols-2 sm:divide-y-0">
+              <div className="reveal mx-auto mt-14 max-w-3xl border-t border-stone-200">
+                {/* sm:gap-x-12 => iki sütun arasında nefes payı; olmadan sol sütunun
+                    sağa yaslı değeri ile sağ sütunun etiketi birbirine giriyordu */}
+                <dl className="grid grid-cols-1 gap-x-12 sm:grid-cols-2">
                   {specs.map((s, i) => (
-                    <div key={i} className="flex items-baseline justify-between gap-4 py-4 sm:border-b sm:border-stone-200">
-                      <dt className="text-[0.7rem] font-semibold uppercase tracking-widestx text-ink-400">{s.label}</dt>
-                      <dd className="text-right font-medium text-ink-800">
+                    <div key={i} className="flex items-baseline justify-between gap-6 border-b border-stone-200 py-4">
+                      <dt className="flex-shrink-0 text-[0.7rem] font-semibold uppercase tracking-widestx text-ink-400">{s.label}</dt>
+                      <dd className="min-w-0 break-words text-right font-medium text-ink-800">
                         {s.href ? (
                           <a href={s.href} className="transition-colors hover:text-bronze-700">{s.value}</a>
                         ) : (
