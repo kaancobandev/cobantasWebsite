@@ -30,6 +30,9 @@ export default function ProjectForm({ project, onSaved, onCancel }) {
   const [status, setStatus] = useState(project?.status || STATUSES[0]);
   const [contractor, setContractor] = useState(project?.contractor || '');
   const [reference, setReference] = useState(project?.reference || '');
+  // Veritabanı "date" tipi 'YYYY-MM-DD' döner — <input type="date"> ile birebir uyumlu
+  const [deliveryDate, setDeliveryDate] = useState(project?.delivery_date || '');
+  const [referenceNo, setReferenceNo] = useState(project?.reference_no || '');
 
   const [coverFile, setCoverFile] = useState(null);
   const [coverPreview, setCoverPreview] = useState(project?.cover_url || '');
@@ -82,6 +85,8 @@ export default function ProjectForm({ project, onSaved, onCancel }) {
         status,
         contractor: contractor.trim() || null,
         reference: reference.trim() || null,
+        delivery_date: deliveryDate || null,
+        reference_no: referenceNo.trim() || null,
       };
 
       const query = editing
@@ -156,17 +161,30 @@ export default function ProjectForm({ project, onSaved, onCancel }) {
               {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
             </select>
           </div>
+          {/* Teslim tarihi */}
+          <div>
+            <label className={label}>Proje Teslim Tarihi</label>
+            <input type="date" value={deliveryDate} onChange={(e) => setDeliveryDate(e.target.value)} className={field} />
+          </div>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2">
           {/* Yüklenici */}
           <div>
             <label className={label}>Yüklenici</label>
             <input type="text" value={contractor} onChange={(e) => setContractor(e.target.value)} className={field} placeholder="örn. Çobantaş İnşaat" />
           </div>
+          {/* Referans */}
+          <div>
+            <label className={label}>Referans</label>
+            <input type="text" value={reference} onChange={(e) => setReference(e.target.value)} className={field} placeholder="örn. İstanbul Ticaret Odası" />
+          </div>
         </div>
 
-        {/* Referans */}
+        {/* Referans numarası */}
         <div>
-          <label className={label}>Referans</label>
-          <input type="text" value={reference} onChange={(e) => setReference(e.target.value)} className={field} placeholder="örn. İstanbul Ticaret Odası" />
+          <label className={label}>Referans No</label>
+          <input type="text" value={referenceNo} onChange={(e) => setReferenceNo(e.target.value)} className={field} placeholder="örn. 2024-017" />
         </div>
 
         {/* Detay metni */}

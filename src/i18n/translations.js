@@ -136,6 +136,7 @@ const tr = {
     gallery: 'Galeri', all: 'Tüm Projeler', contactBtn: 'İletişime Geçin', notFound: 'Proje bulunamadı',
     prev: 'Önceki', next: 'Sonraki', image: 'Görsel',
     specs: 'Proje Bilgileri', type: 'Tür', area: 'Alan', status: 'Durum', contractor: 'Yüklenici', reference: 'Referans',
+    deliveryDate: 'Teslim Tarihi', referenceNo: 'Referans No',
   },
 
   // Veritabanındaki durum değerlerinin görünen karşılığı
@@ -300,6 +301,7 @@ const en = {
     gallery: 'Gallery', all: 'All Projects', contactBtn: 'Get in Touch', notFound: 'Project not found',
     prev: 'Previous', next: 'Next', image: 'Image',
     specs: 'Project Details', type: 'Type', area: 'Area', status: 'Status', contractor: 'Contractor', reference: 'Reference',
+    deliveryDate: 'Delivery Date', referenceNo: 'Reference No',
   },
 
   statusMap: { 'Bitirilen Proje': 'Completed', 'Devam Eden': 'Ongoing' },

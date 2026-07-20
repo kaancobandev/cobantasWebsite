@@ -40,7 +40,7 @@ function Carousel({ images, title }) {
 }
 
 export default function ProjectDetail() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const { id } = useParams();
   const { project, loading } = useProject(id);
   useScrollReveal([loading]);
@@ -111,12 +111,23 @@ export default function ProjectDetail() {
 
           {/* Proje bilgileri — yalnızca dolu alanlar gösterilir */}
           {(() => {
+            // 'YYYY-MM-DD' -> seçili dile göre okunur tarih (bozuksa ham değeri göster)
+            const fmtDate = (d) => {
+              if (!d) return null;
+              const dt = new Date(`${d}T00:00:00`);
+              if (Number.isNaN(dt.getTime())) return d;
+              return dt.toLocaleDateString(lang === 'en' ? 'en-GB' : 'tr-TR', {
+                day: 'numeric', month: 'long', year: 'numeric',
+              });
+            };
             const specs = [
               { label: t('detail.type'), value: project.type },
               { label: t('detail.area'), value: project.area_m2 ? `${Number(project.area_m2).toLocaleString('tr-TR')} m²` : null },
               { label: t('detail.status'), value: project.status ? (t('statusMap')[project.status] || project.status) : null },
+              { label: t('detail.deliveryDate'), value: fmtDate(project.delivery_date) },
               { label: t('detail.contractor'), value: project.contractor },
               { label: t('detail.reference'), value: project.reference },
+              { label: t('detail.referenceNo'), value: project.reference_no },
             ].filter((s) => s.value);
             if (specs.length === 0) return null;
             return (
