@@ -72,6 +72,12 @@
       #intro {
         position: fixed;
         inset: 0;
+        /* iOS Safari'de "inset: 0", adres çubuğunun arkasına uzanan daha UZUN
+           layout viewport'a göre boyutlanır; bu yüzden ortalanan logo görünen
+           merkezin altında kalıyor ve çubuk küçüldükçe aşağı kayıyordu.
+           dvh görünen alanı esas alır. */
+        height: 100vh;  /* eski tarayıcılar için yedek */
+        height: 100dvh;
         z-index: 9999;
         display: grid;
         place-items: center;
