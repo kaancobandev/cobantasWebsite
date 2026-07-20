@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   Target, Eye, ShieldCheck, Gem, Scale, Leaf, Handshake, Lightbulb,
   CheckCircle2, ArrowRight, ChevronRight,
-  Factory, Building2, ClipboardCheck,
+  Factory, Building2, ClipboardCheck, HardHat,
 } from 'lucide-react';
 import { Eyebrow } from '../components/ui';
 import CountUp from '../components/CountUp';
@@ -11,7 +11,8 @@ import useScrollReveal from '../hooks/useScrollReveal';
 import { useLang } from '../context/LanguageContext';
 
 const valueIcons = [ShieldCheck, Gem, Scale, Handshake, Leaf, Lightbulb];
-const activityIcons = [Factory, Building2, ClipboardCheck];
+// Sıra translations.js'teki about.activityItems ile aynı olmalı
+const activityIcons = [HardHat, ClipboardCheck, Building2, Factory];
 const statValues = ['21+', '400+', '60+', '120+'];
 
 export default function About() {
@@ -104,7 +105,7 @@ export default function About() {
               {t('about.activityIntro')}
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {activityAreas.map((a, idx) => {
               const Icon = activityIcons[idx];
               return (

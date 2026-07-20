@@ -32,8 +32,9 @@ const partners = [
 
 // İkonlar (ve faaliyet türleri) kodda; metinler çeviriden gelir
 const serviceIcons = [Building2, Ruler, HardHat, Hammer];
-const activityIcons = [Factory, Building2, ClipboardCheck];
-const activityTypes = ['Fabrika', 'Konut', 'Taahhüt'];
+// Faaliyet alanları — sıra ve türler admin panelindeki TYPES ile birebir aynı olmalı
+const activityIcons = [HardHat, ClipboardCheck, Building2, Factory];
+const activityTypes = ['Müteahhitlik', 'Taahhüt', 'Kentsel Dönüşüm', 'Sanayi Yapıları'];
 
 // Anasayfada öne çıkan amiral proje (başlığa göre bulunur)
 const FLAGSHIP_TITLE = 'Alemara';
@@ -73,6 +74,12 @@ export default function Home() {
         const p = projects.find((x) => x.title === s.title);
         return { title: s.title, img: p?.cover_url || s.img, id: p?.id, type: p?.type };
       }),
+    [projects]
+  );
+
+  // Hangi türlerde en az bir proje var? (boş kategoriye link vermemek için)
+  const typesWithProjects = useMemo(
+    () => new Set(projects.map((p) => p.type).filter(Boolean)),
     [projects]
   );
 
@@ -173,26 +180,42 @@ export default function Home() {
               {t('home.activity.heading')}
             </h2>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {activity.map((a, idx) => {
               const Icon = activityIcons[idx];
-              return (
-                <Link
-                  key={idx}
-                  to={`/projeler?tur=${encodeURIComponent(activityTypes[idx])}`}
-                  className="reveal group flex flex-col border border-stone-200 bg-white p-9 transition-all duration-300 hover:-translate-y-1 hover:border-bronze-300 hover:shadow-card"
-                  style={{ transitionDelay: `${idx * 80}ms` }}
-                >
+              const type = activityTypes[idx];
+              // O türde proje varsa kart tıklanabilir; yoksa boş sayfaya düşmesin diye sadece bilgi kartı
+              const linked = typesWithProjects.has(type);
+              const base = 'reveal flex flex-col border border-stone-200 bg-white p-9 transition-all duration-300';
+              const content = (
+                <>
                   <div className="grid h-14 w-14 place-items-center bg-stone-100 text-bronze-600 transition-colors group-hover:bg-bronze-600 group-hover:text-white">
                     <Icon className="h-7 w-7" strokeWidth={1.25} />
                   </div>
                   <h3 className="mt-7 font-serif text-xl text-ink-900">{a.title}</h3>
                   <p className="mt-4 flex-1 text-sm leading-relaxed text-ink-500">{a.desc}</p>
-                  <span className="mt-6 inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-bronze-700">
-                    {t('home.activity.cta')}
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
+                  {linked && (
+                    <span className="mt-6 inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-bronze-700">
+                      {t('home.activity.cta')}
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  )}
+                </>
+              );
+
+              return linked ? (
+                <Link
+                  key={idx}
+                  to={`/projeler?tur=${encodeURIComponent(type)}`}
+                  className={`${base} group hover:-translate-y-1 hover:border-bronze-300 hover:shadow-card`}
+                  style={{ transitionDelay: `${idx * 80}ms` }}
+                >
+                  {content}
                 </Link>
+              ) : (
+                <div key={idx} className={base} style={{ transitionDelay: `${idx * 80}ms` }}>
+                  {content}
+                </div>
               );
             })}
           </div>
