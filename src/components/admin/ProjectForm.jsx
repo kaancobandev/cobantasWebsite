@@ -30,9 +30,9 @@ export default function ProjectForm({ project, onSaved, onCancel }) {
   const [status, setStatus] = useState(project?.status || STATUSES[0]);
   const [contractor, setContractor] = useState(project?.contractor || '');
   const [reference, setReference] = useState(project?.reference || '');
-  // Veritabanı "date" tipi 'YYYY-MM-DD' döner — <input type="date"> ile birebir uyumlu
+  // Serbest metin: "2024-2026", "Mart 2025" gibi aralık/yaklaşık değerler yazılabilsin
   const [deliveryDate, setDeliveryDate] = useState(project?.delivery_date || '');
-  const [referenceNo, setReferenceNo] = useState(project?.reference_no || '');
+  const [referencePhone, setReferencePhone] = useState(project?.reference_phone || '');
 
   const [coverFile, setCoverFile] = useState(null);
   const [coverPreview, setCoverPreview] = useState(project?.cover_url || '');
@@ -85,8 +85,8 @@ export default function ProjectForm({ project, onSaved, onCancel }) {
         status,
         contractor: contractor.trim() || null,
         reference: reference.trim() || null,
-        delivery_date: deliveryDate || null,
-        reference_no: referenceNo.trim() || null,
+        delivery_date: deliveryDate.trim() || null,
+        reference_phone: referencePhone.trim() || null,
       };
 
       const query = editing
@@ -161,10 +161,10 @@ export default function ProjectForm({ project, onSaved, onCancel }) {
               {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
             </select>
           </div>
-          {/* Teslim tarihi */}
+          {/* Teslim tarihi — serbest metin */}
           <div>
             <label className={label}>Proje Teslim Tarihi</label>
-            <input type="date" value={deliveryDate} onChange={(e) => setDeliveryDate(e.target.value)} className={field} />
+            <input type="text" value={deliveryDate} onChange={(e) => setDeliveryDate(e.target.value)} className={field} placeholder="örn. 2024-2026" />
           </div>
         </div>
 
@@ -174,17 +174,17 @@ export default function ProjectForm({ project, onSaved, onCancel }) {
             <label className={label}>Yüklenici</label>
             <input type="text" value={contractor} onChange={(e) => setContractor(e.target.value)} className={field} placeholder="örn. Çobantaş İnşaat" />
           </div>
-          {/* Referans */}
+          {/* Referans kişi/kurum */}
           <div>
             <label className={label}>Referans</label>
-            <input type="text" value={reference} onChange={(e) => setReference(e.target.value)} className={field} placeholder="örn. İstanbul Ticaret Odası" />
+            <input type="text" value={reference} onChange={(e) => setReference(e.target.value)} className={field} placeholder="örn. Ahmet Yılmaz" />
           </div>
         </div>
 
-        {/* Referans numarası */}
+        {/* Referans telefonu */}
         <div>
-          <label className={label}>Referans No</label>
-          <input type="text" value={referenceNo} onChange={(e) => setReferenceNo(e.target.value)} className={field} placeholder="örn. 2024-017" />
+          <label className={label}>Referans Telefon</label>
+          <input type="tel" value={referencePhone} onChange={(e) => setReferencePhone(e.target.value)} className={field} placeholder="örn. 0532 000 00 00" />
         </div>
 
         {/* Detay metni */}

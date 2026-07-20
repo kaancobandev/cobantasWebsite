@@ -40,7 +40,7 @@ function Carousel({ images, title }) {
 }
 
 export default function ProjectDetail() {
-  const { t, lang } = useLang();
+  const { t } = useLang();
   const { id } = useParams();
   const { project, loading } = useProject(id);
   useScrollReveal([loading]);
@@ -111,23 +111,21 @@ export default function ProjectDetail() {
 
           {/* Proje bilgileri — yalnızca dolu alanlar gösterilir */}
           {(() => {
-            // 'YYYY-MM-DD' -> seçili dile göre okunur tarih (bozuksa ham değeri göster)
-            const fmtDate = (d) => {
-              if (!d) return null;
-              const dt = new Date(`${d}T00:00:00`);
-              if (Number.isNaN(dt.getTime())) return d;
-              return dt.toLocaleDateString(lang === 'en' ? 'en-GB' : 'tr-TR', {
-                day: 'numeric', month: 'long', year: 'numeric',
-              });
-            };
             const specs = [
               { label: t('detail.type'), value: project.type },
               { label: t('detail.area'), value: project.area_m2 ? `${Number(project.area_m2).toLocaleString('tr-TR')} m²` : null },
               { label: t('detail.status'), value: project.status ? (t('statusMap')[project.status] || project.status) : null },
-              { label: t('detail.deliveryDate'), value: fmtDate(project.delivery_date) },
+              // Serbest metin olarak girilir ("2024-2026" gibi) — olduğu gibi gösterilir
+              { label: t('detail.deliveryDate'), value: project.delivery_date },
               { label: t('detail.contractor'), value: project.contractor },
               { label: t('detail.reference'), value: project.reference },
-              { label: t('detail.referenceNo'), value: project.reference_no },
+              {
+                label: t('detail.referencePhone'),
+                value: project.reference_phone,
+                href: project.reference_phone
+                  ? `tel:${String(project.reference_phone).replace(/[^\d+]/g, '')}`
+                  : null,
+              },
             ].filter((s) => s.value);
             if (specs.length === 0) return null;
             return (
@@ -136,7 +134,13 @@ export default function ProjectDetail() {
                   {specs.map((s, i) => (
                     <div key={i} className="flex items-baseline justify-between gap-4 py-4 sm:border-b sm:border-stone-200">
                       <dt className="text-[0.7rem] font-semibold uppercase tracking-widestx text-ink-400">{s.label}</dt>
-                      <dd className="text-right font-medium text-ink-800">{s.value}</dd>
+                      <dd className="text-right font-medium text-ink-800">
+                        {s.href ? (
+                          <a href={s.href} className="transition-colors hover:text-bronze-700">{s.value}</a>
+                        ) : (
+                          s.value
+                        )}
+                      </dd>
                     </div>
                   ))}
                 </dl>
