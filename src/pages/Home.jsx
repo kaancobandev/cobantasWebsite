@@ -27,6 +27,7 @@ const partners = [
   { name: 'Binbay', src: '/logos/binbay.png' },
   { name: 'Ceylan Şehircilik', src: '/logos/ceylan-sehircilik.png' },
   { name: 'Delta Arazi Geliştirme', src: '/logos/delta-arazi-gelistirme.png' },
+  { name: 'Emlak Konut', src: '/logos/emlak-konut.png' },
   { name: 'Ergün Global Yapı', src: '/logos/ergun-global-yapi.png' },
   { name: 'Gül Proje', src: '/logos/gul-proje.png' },
   { name: 'Gülan Grup', src: '/logos/gulan-group.png' },
