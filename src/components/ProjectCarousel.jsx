@@ -1,41 +1,75 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
 import { useLang } from '../context/LanguageContext';
 
 // Anasayfanın en üstündeki tam genişlik proje slider'ı.
-// Görseller yumuşak crossfade ile geçer, aktif görsele yavaş Ken Burns zoom uygulanır.
-// prefers-reduced-motion açıkken: otomatik geçiş ve zoom kapalı (oklarla gezilebilir).
+// Masaüstü: oklar + noktalar, fareyle üzerine gelince durur.
+// Mobil: oklar gizli, parmakla kaydırarak gezilir.
+// prefers-reduced-motion açıkken otomatik geçiş ve zoom kapalı (elle gezilebilir).
 export default function ProjectCarousel({ slides = [], interval = 2000 }) {
   const { t } = useLang();
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const touchStart = useRef(null);
 
   const reduce =
     typeof window !== 'undefined' &&
     window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Fareyle "üzerine gelince durdur" davranışı YALNIZCA gerçekten hover'ı olan
+  // cihazlarda geçerli olmalı. Dokunmatikte tarayıcı sahte bir mouseenter üretir,
+  // mouseleave ise gelmez -> slider ilk dokunuşta kalıcı olarak dururdu.
+  const canHover =
+    typeof window !== 'undefined' &&
+    window.matchMedia &&
+    window.matchMedia('(hover: hover)').matches;
+
   const count = slides.length;
   const go = useCallback((n) => setIndex((i) => (i + n + count) % count), [count]);
 
+  // setInterval yerine index'e bağlı setTimeout: elle geçiş yapılınca (kaydırma/nokta)
+  // sayaç sıfırlanır, aksi hâlde kaydırmanın hemen ardından slayt atlayabilirdi.
   useEffect(() => {
     if (reduce || paused || count <= 1) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % count), interval);
-    return () => clearInterval(id);
-  }, [reduce, paused, count, interval]);
+    const id = setTimeout(() => setIndex((i) => (i + 1) % count), interval);
+    return () => clearTimeout(id);
+  }, [index, reduce, paused, count, interval]);
+
+  // Parmakla kaydırma. Dikey hareket baskınsa dokunulmaz -> sayfa kaydırma bozulmaz.
+  const onTouchStart = (e) => {
+    const p = e.changedTouches[0];
+    touchStart.current = { x: p.clientX, y: p.clientY };
+  };
+  const onTouchEnd = (e) => {
+    if (!touchStart.current) return;
+    const p = e.changedTouches[0];
+    const dx = p.clientX - touchStart.current.x;
+    const dy = p.clientY - touchStart.current.y;
+    touchStart.current = null;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
+  };
 
   if (count === 0) return null;
   const active = slides[index];
+
+  const hoverProps = canHover
+    ? {
+        onMouseEnter: () => setPaused(true),
+        onMouseLeave: () => setPaused(false),
+        onFocus: () => setPaused(true),
+        onBlur: () => setPaused(false),
+      }
+    : {};
 
   return (
     <section
       aria-label={t('home.projects.heading')}
       className="relative w-full overflow-hidden bg-ink-950"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      {...hoverProps}
     >
       <div className="relative h-[58vh] w-full md:h-[70vh] lg:h-[78vh]">
         {slides.map((s, i) => (
@@ -46,6 +80,7 @@ export default function ProjectCarousel({ slides = [], interval = 2000 }) {
             loading={i === 0 ? 'eager' : 'lazy'}
             fetchPriority={i === 0 ? 'high' : undefined}
             decoding="async"
+            draggable="false"
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-out ${
               i === index ? 'opacity-100' : 'opacity-0'
             } ${i === index && !reduce ? 'animate-kenburns' : ''}`}
@@ -74,14 +109,14 @@ export default function ProjectCarousel({ slides = [], interval = 2000 }) {
           </div>
         </div>
 
-        {/* Oklar */}
+        {/* Oklar — yalnızca masaüstü; mobilde parmakla kaydırılır */}
         {count > 1 && (
           <>
             <button
               type="button"
               onClick={() => go(-1)}
               aria-label={t('detail.prev')}
-              className="absolute left-4 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center border border-white/25 bg-ink-950/30 text-white backdrop-blur transition-colors hover:border-bronze-400 hover:bg-bronze-600 lg:left-8"
+              className="absolute left-4 top-1/2 hidden h-12 w-12 -translate-y-1/2 place-items-center border border-white/25 bg-ink-950/30 text-white backdrop-blur transition-colors hover:border-bronze-400 hover:bg-bronze-600 md:grid lg:left-8"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -89,14 +124,14 @@ export default function ProjectCarousel({ slides = [], interval = 2000 }) {
               type="button"
               onClick={() => go(1)}
               aria-label={t('detail.next')}
-              className="absolute right-4 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center border border-white/25 bg-ink-950/30 text-white backdrop-blur transition-colors hover:border-bronze-400 hover:bg-bronze-600 lg:right-8"
+              className="absolute right-4 top-1/2 hidden h-12 w-12 -translate-y-1/2 place-items-center border border-white/25 bg-ink-950/30 text-white backdrop-blur transition-colors hover:border-bronze-400 hover:bg-bronze-600 md:grid lg:right-8"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
           </>
         )}
 
-        {/* Nokta göstergeleri */}
+        {/* Nokta göstergeleri (mobilde de görünür ve dokunulabilir) */}
         {count > 1 && (
           <div className="absolute bottom-6 right-6 flex items-center gap-2 lg:right-8">
             {slides.map((s, i) => (
