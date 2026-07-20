@@ -17,17 +17,24 @@ import { useLang } from '../context/LanguageContext';
 import { contactInfo } from '../data/site';
 import { playIntroExit } from '../lib/intro';
 
+// İş ortağı logoları — dosyalar public/logos/ altında.
+// Yeni logo eklerken: dosyayı public/logos/ içine koy, buraya bir satır ekle,
+// sonra `npm run optimize:images` çalıştır.
 const partners = [
+  { name: 'Alkataş', src: '/logos/alkatas.png' },
+  { name: 'Artea', src: '/logos/artea.png' },
   { name: 'Batı Yapı', src: '/logos/bati-yapi.png' },
-  { name: 'Binbay Yapı', src: '/logos/binbay-yapi.png' },
-  { name: 'Ergün', src: '/logos/ergun.png' },
+  { name: 'Binbay', src: '/logos/binbay.png' },
+  { name: 'Ceylan Şehircilik', src: '/logos/ceylan-sehircilik.png' },
+  { name: 'Delta Arazi Geliştirme', src: '/logos/delta-arazi-gelistirme.png' },
+  { name: 'Ergün Global Yapı', src: '/logos/ergun-global-yapi.png' },
+  { name: 'Gül Proje', src: '/logos/gul-proje.png' },
+  { name: 'Gülan Grup', src: '/logos/gulan-group.png' },
+  { name: 'Irmaklar', src: '/logos/irmaklar.png' },
   { name: 'Küba Mimarlık', src: '/logos/kuba-mimarlik.png' },
   { name: 'Mutlu İnşaat', src: '/logos/mutlu-insaat.png' },
   { name: 'Sistem A', src: '/logos/sistem-a.png' },
-  { name: 'SOM', src: '/logos/som.png' },
-  { name: 'UB Holding', src: '/logos/ub-holding.jpg' },
-  { name: 'Öz Baykara İnşaat', src: '/logos/oz-baykara.png' },
-  { name: 'Irmaklar', src: '/logos/irmaklar.png' },
+  { name: 'UB Holding', src: '/logos/ub-holding.png' },
 ];
 
 // İkonlar (ve faaliyet türleri) kodda; metinler çeviriden gelir
@@ -430,7 +437,7 @@ export default function Home() {
                   title={p.name}
                   loading="lazy"
                   onError={(e) => { e.currentTarget.parentElement.style.display = 'none'; }}
-                  className="max-h-12 w-auto object-contain"
+                  className="max-h-12 w-auto max-w-full object-contain"
                 />
               </div>
             ))}
