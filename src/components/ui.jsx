@@ -1,4 +1,5 @@
-// Paylaşılan küçük UI parçaları: marka ikonları + bölüm üstü "etiket"
+// Paylaşılan küçük UI parçaları: marka ikonları + bölüm üstü "etiket" + durum rozeti
+import { useLang } from '../context/LanguageContext';
 
 export const FacebookIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>);
 export const TwitterIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>);
@@ -13,6 +14,22 @@ export const socialIcons = {
   instagram: InstagramIcon,
   linkedin: LinkedinIcon,
   whatsapp: WhatsappIcon,
+};
+
+// Proje durumu rozeti — "Devam Eden" bronz, "Bitirilen Proje" koyu zeminle ayrışır
+export const StatusBadge = ({ status, className = '' }) => {
+  const { t } = useLang();
+  if (!status) return null;
+  const ongoing = status === 'Devam Eden';
+  return (
+    <span
+      className={`px-3 py-1.5 text-[0.6rem] font-semibold uppercase tracking-widestx text-white backdrop-blur ${
+        ongoing ? 'bg-bronze-600/90' : 'bg-ink-950/75'
+      } ${className}`}
+    >
+      {t('statusMap')[status] || status}
+    </span>
+  );
 };
 
 // Bölüm üstü zarif "etiket" — ince bronz çizgi + büyük harf metin

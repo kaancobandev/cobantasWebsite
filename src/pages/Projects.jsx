@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowUpRight, ArrowRight, ChevronRight } from 'lucide-react';
-import { Eyebrow } from '../components/ui';
+import { Eyebrow, StatusBadge } from '../components/ui';
 import useScrollReveal from '../hooks/useScrollReveal';
 import { useProjects } from '../hooks/useProjects';
 import { useLang } from '../context/LanguageContext';
@@ -112,6 +112,7 @@ export default function Projects() {
                       />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-ink-950/35 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <StatusBadge status={p.status} className="absolute left-3 top-3" />
                   </div>
                   <div className="flex items-center justify-between gap-4 p-6">
                     <div>

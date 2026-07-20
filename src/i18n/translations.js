@@ -132,7 +132,14 @@ const tr = {
     ctaHeading: 'Aklınızdaki projeyi birlikte hayata geçirelim', ctaBtn: 'İletişime Geçin',
   },
 
-  detail: { gallery: 'Galeri', all: 'Tüm Projeler', contactBtn: 'İletişime Geçin', notFound: 'Proje bulunamadı', prev: 'Önceki', next: 'Sonraki', image: 'Görsel' },
+  detail: {
+    gallery: 'Galeri', all: 'Tüm Projeler', contactBtn: 'İletişime Geçin', notFound: 'Proje bulunamadı',
+    prev: 'Önceki', next: 'Sonraki', image: 'Görsel',
+    specs: 'Proje Bilgileri', type: 'Tür', area: 'Alan', status: 'Durum', contractor: 'Yüklenici', reference: 'Referans',
+  },
+
+  // Veritabanındaki durum değerlerinin görünen karşılığı
+  statusMap: { 'Bitirilen Proje': 'Bitirilen Proje', 'Devam Eden': 'Devam Eden' },
 
   notFound: {
     title: 'Sayfa bulunamadı',
@@ -289,7 +296,13 @@ const en = {
     ctaHeading: 'Let’s bring your project to life together', ctaBtn: 'Get in Touch',
   },
 
-  detail: { gallery: 'Gallery', all: 'All Projects', contactBtn: 'Get in Touch', notFound: 'Project not found', prev: 'Previous', next: 'Next', image: 'Image' },
+  detail: {
+    gallery: 'Gallery', all: 'All Projects', contactBtn: 'Get in Touch', notFound: 'Project not found',
+    prev: 'Previous', next: 'Next', image: 'Image',
+    specs: 'Project Details', type: 'Type', area: 'Area', status: 'Status', contractor: 'Contractor', reference: 'Reference',
+  },
+
+  statusMap: { 'Bitirilen Proje': 'Completed', 'Devam Eden': 'Ongoing' },
 
   notFound: {
     title: 'Page not found',

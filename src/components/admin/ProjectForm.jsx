@@ -6,6 +6,10 @@ import { supabase, MEDIA_BUCKET } from '../../lib/supabase';
 // (bkz. supabase/setup.sql ve supabase/update-types.sql)
 const TYPES = ['Müteahhitlik', 'Taahhüt', 'Kentsel Dönüşüm', 'Sanayi Yapıları'];
 
+// Veritabanındaki projects_status_check kısıtıyla birebir aynı olmalı
+// (bkz. supabase/add-project-fields.sql)
+const STATUSES = ['Bitirilen Proje', 'Devam Eden'];
+
 async function uploadFile(file, folder) {
   const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
   const path = `${folder}/${crypto.randomUUID()}.${ext}`;
@@ -23,6 +27,9 @@ export default function ProjectForm({ project, onSaved, onCancel }) {
   const [type, setType] = useState(project?.type || TYPES[0]);
   const [area, setArea] = useState(project?.area_m2 ?? '');
   const [body, setBody] = useState(project?.body || '');
+  const [status, setStatus] = useState(project?.status || STATUSES[0]);
+  const [contractor, setContractor] = useState(project?.contractor || '');
+  const [reference, setReference] = useState(project?.reference || '');
 
   const [coverFile, setCoverFile] = useState(null);
   const [coverPreview, setCoverPreview] = useState(project?.cover_url || '');
@@ -72,6 +79,9 @@ export default function ProjectForm({ project, onSaved, onCancel }) {
         cover_url,
         body,
         images,
+        status,
+        contractor: contractor.trim() || null,
+        reference: reference.trim() || null,
       };
 
       const query = editing
@@ -136,6 +146,27 @@ export default function ProjectForm({ project, onSaved, onCancel }) {
             <label className={label}>Alan (m²)</label>
             <input type="number" min="0" value={area} onChange={(e) => setArea(e.target.value)} className={field} placeholder="örn. 12000" />
           </div>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2">
+          {/* Durum */}
+          <div>
+            <label className={label}>Durum</label>
+            <select value={status} onChange={(e) => setStatus(e.target.value)} className={field}>
+              {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
+          {/* Yüklenici */}
+          <div>
+            <label className={label}>Yüklenici</label>
+            <input type="text" value={contractor} onChange={(e) => setContractor(e.target.value)} className={field} placeholder="örn. Çobantaş İnşaat" />
+          </div>
+        </div>
+
+        {/* Referans */}
+        <div>
+          <label className={label}>Referans</label>
+          <input type="text" value={reference} onChange={(e) => setReference(e.target.value)} className={field} placeholder="örn. İstanbul Ticaret Odası" />
         </div>
 
         {/* Detay metni */}

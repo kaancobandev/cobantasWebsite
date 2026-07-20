@@ -115,8 +115,18 @@ export default function Dashboard() {
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="truncate font-serif text-lg text-ink-900">{p.title}</div>
-                      <div className="mt-0.5 text-xs text-ink-500">
-                        {p.type}{p.area_m2 ? ` · ${p.area_m2.toLocaleString('tr-TR')} m²` : ''}{p.images?.length ? ` · ${p.images.length} galeri foto` : ''}
+                      <div className="mt-0.5 flex flex-wrap items-center gap-x-1.5 text-xs text-ink-500">
+                        {p.status && (
+                          <span className={`font-semibold ${p.status === 'Devam Eden' ? 'text-bronze-700' : 'text-ink-600'}`}>
+                            {p.status}
+                          </span>
+                        )}
+                        <span>
+                          {p.status ? '· ' : ''}{p.type}
+                          {p.area_m2 ? ` · ${p.area_m2.toLocaleString('tr-TR')} m²` : ''}
+                          {p.contractor ? ` · ${p.contractor}` : ''}
+                          {p.images?.length ? ` · ${p.images.length} galeri foto` : ''}
+                        </span>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">

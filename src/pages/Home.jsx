@@ -6,7 +6,7 @@ import {
   ArrowRight, ArrowUpRight, CheckCircle2, ShieldCheck,
   Factory, ClipboardCheck,
 } from 'lucide-react';
-import { Eyebrow } from '../components/ui';
+import { Eyebrow, StatusBadge } from '../components/ui';
 import ContactForm from '../components/ContactForm';
 import CountUp from '../components/CountUp';
 import HeroSlideshow from '../components/HeroSlideshow';
@@ -387,6 +387,7 @@ export default function Home() {
                   className="absolute inset-0 h-full w-full object-cover opacity-80 transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-100"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/25 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-75" />
+                <StatusBadge status={project.status} className="absolute left-4 top-4" />
                 <div className="absolute inset-x-0 bottom-0 flex translate-y-2 items-end justify-between p-7 transition-transform duration-500 group-hover:translate-y-0">
                   <div>
                     <div className="mb-2 text-[0.65rem] font-semibold uppercase tracking-widestx text-bronze-300">

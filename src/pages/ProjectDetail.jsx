@@ -109,6 +109,30 @@ export default function ProjectDetail() {
             </div>
           )}
 
+          {/* Proje bilgileri — yalnızca dolu alanlar gösterilir */}
+          {(() => {
+            const specs = [
+              { label: t('detail.type'), value: project.type },
+              { label: t('detail.area'), value: project.area_m2 ? `${Number(project.area_m2).toLocaleString('tr-TR')} m²` : null },
+              { label: t('detail.status'), value: project.status ? (t('statusMap')[project.status] || project.status) : null },
+              { label: t('detail.contractor'), value: project.contractor },
+              { label: t('detail.reference'), value: project.reference },
+            ].filter((s) => s.value);
+            if (specs.length === 0) return null;
+            return (
+              <div className="reveal mx-auto mt-14 max-w-3xl border-y border-stone-200">
+                <dl className="grid grid-cols-1 divide-y divide-stone-200 sm:grid-cols-2 sm:divide-y-0">
+                  {specs.map((s, i) => (
+                    <div key={i} className="flex items-baseline justify-between gap-4 py-4 sm:border-b sm:border-stone-200">
+                      <dt className="text-[0.7rem] font-semibold uppercase tracking-widestx text-ink-400">{s.label}</dt>
+                      <dd className="text-right font-medium text-ink-800">{s.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            );
+          })()}
+
           {/* Detay metni */}
           {project.body && (
             <div className="reveal mx-auto mt-14 max-w-3xl whitespace-pre-line text-lg leading-relaxed text-ink-600">
