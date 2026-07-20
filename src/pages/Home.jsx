@@ -430,7 +430,7 @@ export default function Home() {
                   title={p.name}
                   loading="lazy"
                   onError={(e) => { e.currentTarget.parentElement.style.display = 'none'; }}
-                  className="max-h-12 w-auto object-contain opacity-60 grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0"
+                  className="max-h-12 w-auto object-contain"
                 />
               </div>
             ))}
