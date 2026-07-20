@@ -4,3 +4,21 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+# Güvenlik başlıkları.
+# NOT: Content-Security-Policy bilinçli olarak eklenmedi — Google Fonts/Haritalar,
+# Supabase ve Netlify Forms'u kapsayan yanlış bir CSP siteyi sessizce bozar.
+# Eklenecekse önce Report-Only modda test edilmeli.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
+
+# Parmak izli (hash'li) varlıklar kalıcı olarak önbelleğe alınabilir
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

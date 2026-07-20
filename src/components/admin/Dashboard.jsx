@@ -1,9 +1,20 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Plus, Pencil, Trash2, LogOut, ExternalLink, Building2 } from 'lucide-react';
-import { supabase } from '../../lib/supabase';
+import { supabase, MEDIA_BUCKET } from '../../lib/supabase';
 import { useAuth } from '../../context/AuthContext';
 import ProjectForm from './ProjectForm';
+
+// Supabase public URL -> storage içindeki dosya yolu.
+// public/ klasöründen gelen sabit görseller (ör. "/pinnacle.jpg") null döner;
+// onlar depoya ait değildir, silinmemelidir.
+function storagePathFromUrl(url) {
+  if (!url) return null;
+  const marker = `/storage/v1/object/public/${MEDIA_BUCKET}/`;
+  const i = url.indexOf(marker);
+  if (i === -1) return null;
+  return decodeURIComponent(url.slice(i + marker.length));
+}
 
 export default function Dashboard() {
   const { email, signOut } = useAuth();
@@ -28,8 +39,19 @@ export default function Dashboard() {
 
   async function handleDelete(p) {
     if (!window.confirm(`"${p.title}" projesini silmek istediğinize emin misiniz?`)) return;
+
+    // Önce kayıt silinir (kullanıcının gördüğü asıl işlem)
     const { error } = await supabase.from('projects').delete().eq('id', p.id);
     if (error) { setError(error.message); return; }
+
+    // Ardından yüklenmiş görseller storage'dan temizlenir (en iyi çaba —
+    // başarısız olursa yalnızca artık dosya kalır, işlem yine de tamamlanmıştır)
+    const paths = [p.cover_url, ...(p.images || [])].map(storagePathFromUrl).filter(Boolean);
+    if (paths.length) {
+      const { error: rmErr } = await supabase.storage.from(MEDIA_BUCKET).remove(paths);
+      if (rmErr) console.warn('Görseller silinemedi:', rmErr.message);
+    }
+
     fetchProjects();
   }
 
