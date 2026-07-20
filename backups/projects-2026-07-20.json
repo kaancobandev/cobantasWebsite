@@ -1,0 +1,158 @@
+{
+  "exportedAt": "2026-07-20T12:20:02.968Z",
+  "table": "projects",
+  "count": 11,
+  "projects": [
+    {
+      "id": "b22feb1e-2559-4e8e-bb3d-710bcdcd30d8",
+      "created_at": "2026-07-14T08:06:08.782233+00:00",
+      "title": "İpek Sağlık Lojistik Destek",
+      "type": "Taahhüt",
+      "area_m2": 40000,
+      "cover_url": "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/covers/ea3c5490-7240-49c6-96b9-b6351b46daf6.jpeg",
+      "body": "Yüklenici: ALKATAŞ İNŞAAT\nÜMİT DEMİR/ PROJE MÜDÜRÜ\n0531977 6642",
+      "images": [
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/4e227828-7317-49a5-aeaf-d6a7659c05a8.jpeg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/a93f8b79-eee4-45fb-8cb5-ef9d41e92217.jpeg"
+      ]
+    },
+    {
+      "id": "108bcac8-022b-4c46-b66f-e11a1f029aa5",
+      "created_at": "2026-07-14T08:03:15.116648+00:00",
+      "title": "İstanbul Ticaret Odası Merkez Binası",
+      "type": "Taahhüt",
+      "area_m2": 40000,
+      "cover_url": "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/covers/227c6296-822d-401f-ad00-e74aac260889.jpeg",
+      "body": "Yüklenici: ALKATAŞ İNŞAAT\nİSMAİL KARAYİĞİT / PROJE MÜDÜRÜ\n0545 912 98 94",
+      "images": [
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/087446f4-fa1c-441c-811b-76bc91cfae2f.jpeg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/6b28b497-0ca7-4165-bac7-bb4d39ff64c5.jpeg"
+      ]
+    },
+    {
+      "id": "53ffd266-9984-4957-83a1-fb945ff45b68",
+      "created_at": "2026-07-14T07:14:48.91685+00:00",
+      "title": "Vadi Panaroma",
+      "type": "Taahhüt",
+      "area_m2": 100000,
+      "cover_url": "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/covers/f7646f74-d4ac-4ba8-8151-47e9a787e461.jpg",
+      "body": "Yüklenici: EMLAK KONUT / BİNBAY İNŞAAT\nCENK ARSLAN / GENEL KOORDİNATÖR\n0553 132 41 33",
+      "images": [
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/ad20d445-5031-49da-a733-72dc091604ae.jpeg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/ad56e868-ec74-45b0-8c3c-6864f253adbf.jpeg"
+      ]
+    },
+    {
+      "id": "7dceca2d-1cf2-415e-b188-56a16c43058e",
+      "created_at": "2026-07-14T07:11:15.846666+00:00",
+      "title": "Artea Vogue",
+      "type": "Taahhüt",
+      "area_m2": 70000,
+      "cover_url": "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/covers/5bbd569c-c615-454c-a8d2-7d71c0b05486.jfif",
+      "body": "Yüklenici: ARTEA-EVİ METAL İNŞAAT ORTAKLIĞI\nSELÇUK YAVAŞ / GENEL KOORDİNATÖR\n0539 544 3261",
+      "images": [
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/aa5dea16-f71b-42c7-b229-c8976001ed9d.jpeg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/6f984a25-bd43-4cab-9498-9432be6b7285.jpeg"
+      ]
+    },
+    {
+      "id": "4ec8f6bf-c005-44cc-b5a1-2311d5f95763",
+      "created_at": "2026-07-14T07:07:21.132082+00:00",
+      "title": "İstanbul İga Depolama ve Lojistik Alanı",
+      "type": "Taahhüt",
+      "area_m2": 45000,
+      "cover_url": "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/covers/329089e5-309a-4dee-8d9a-a660336e5b7a.jpeg",
+      "body": "Yüklenici: SİSTEMA/TRENDYOL\nERTUĞRUL KOPARAN / GENEL MÜDÜR\n0533 494 37 48\n",
+      "images": [
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/608ece59-d6b9-4c56-b047-f71546eb1c77.jpg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/ce95f168-9167-4d81-8eef-168670a83cfe.jpg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/0f0fc7be-400e-492b-a13b-a4534146bac7.jpg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/05c6fb5f-f288-444d-b65f-8cbb5a1b9e26.jpg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/e3fea94c-5297-455d-aad5-957eee5a943d.jpg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/38a23334-6548-4d7f-ab6c-524ea38f83e6.jpg"
+      ]
+    },
+    {
+      "id": "d2a4e6cb-0136-4add-9067-647a01269794",
+      "created_at": "2026-06-17T19:58:13.795744+00:00",
+      "title": "Lotus İstanbul",
+      "type": "Taahhüt",
+      "area_m2": 60000,
+      "cover_url": "/lotus-istanbul.jpg",
+      "body": "Yüklenici: KÜBA MİM. — CEYLAN SEHİRCİLİK\nSEZAİ BEY / PROJE MÜDÜRÜ\n0532 209 97 71",
+      "images": [
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/cbb56030-4798-4f53-a0fc-42d66109e9ba.jpeg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/1dcf259f-5a5f-46cf-b271-cf6a8a337a47.jpg"
+      ]
+    },
+    {
+      "id": "6401b794-49ec-44a4-ab02-dc9617dbd2d0",
+      "created_at": "2026-06-17T19:58:13.795744+00:00",
+      "title": "Panorama Bulvar Silivri",
+      "type": "Taahhüt",
+      "area_m2": 80000,
+      "cover_url": "/panorama-silivri.jpg",
+      "body": "Yüklenici: ERGÜN HOLDİNG PANORAMAORT.\nYUSUF İHTİYAR/GENEL MÜDÜR\n0532 455 58 77",
+      "images": [
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/7c984c2b-0a44-4734-8a4e-953f1e9a3f1a.jpg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/d0c851b7-2ac6-495c-88c1-39a71422b14b.jpg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/edd5903d-7a41-4bf0-bd30-fc753c307dd5.jpg"
+      ]
+    },
+    {
+      "id": "d9f66b2a-e77a-4226-b3f3-83cb84f3fb36",
+      "created_at": "2026-06-17T19:58:13.795744+00:00",
+      "title": "Lania Recidance",
+      "type": "Taahhüt",
+      "area_m2": 52000,
+      "cover_url": "/pinnacle.jpg",
+      "body": "Yüklenici: UB HOLDİNG\nAYTAÇ BAKAN/ GENEL MÜDÜR\n0542 448 99 00",
+      "images": [
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/c4312e63-0089-4d14-ad96-4edc65738c49.jpg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/bb1b3975-6771-4d4e-a950-a31ebaba1b4c.jpg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/a9e51ad2-debc-40ce-b282-1b3863f5e17d.jpg"
+      ]
+    },
+    {
+      "id": "e0418083-2d03-4a1e-ad67-51070a9dee3f",
+      "created_at": "2026-06-17T19:58:13.795744+00:00",
+      "title": "Flamingo Alkent",
+      "type": "Taahhüt",
+      "area_m2": 80000,
+      "cover_url": "/flamingo.jpg",
+      "body": "Yüklenici: GÜL/DELTA ORTAKLIĞI \nİSMAİL KÜÇÜKGÖK / PROJE MÜDÜRÜ\n0532 291 26 46",
+      "images": [
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/5eccf73f-4abb-4733-815a-8878cfd39182.jpg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/3251ee7a-3b67-4b4f-90de-08187f9fdb90.jpg"
+      ]
+    },
+    {
+      "id": "990cd282-bdcd-4e24-ab4a-8a27bdd3efe9",
+      "created_at": "2026-06-17T19:58:13.795744+00:00",
+      "title": "Bahçe Bahçeşehir",
+      "type": "Taahhüt",
+      "area_m2": 130000,
+      "cover_url": "/bahce-bahcesehir.jpg",
+      "body": "Yüklenici: MUTLU İNŞAAT VE CEYLAN ŞEHIRCILIK ORTAKLIĞI\nKORHAN KOYUNCU / PROJE MÜDÜRÜ\n0532 713 39 46",
+      "images": [
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/37a811b8-bf0f-4ad9-9b3b-de794e5d4dfe.jpg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/cf255972-d17e-4420-a498-a387c78ebdb0.jpg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/617435f6-1446-4d46-8d0f-ecb3461ca178.jpg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/abbb2347-c664-4074-9557-e5985dc0bf02.jpeg"
+      ]
+    },
+    {
+      "id": "61baf911-fde2-42d9-97ca-ecacad463682",
+      "created_at": "2026-06-17T19:58:13.795744+00:00",
+      "title": "Alemara",
+      "type": "Taahhüt",
+      "area_m2": 125000,
+      "cover_url": "/alemara.jpg",
+      "body": "Yüklenici: BAŞAKŞEHİR BELEDİYESİ / BİNBAY İNŞAAT\nCENK ARSLAN / GENEL KOORDİNATÖR\n0553 132 4133",
+      "images": [
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/82cb5310-6f1f-4d0d-9184-3d9a0d274dee.jpg",
+        "https://srlymseaeenqjikndydg.supabase.co/storage/v1/object/public/project-media/carousel/6b2ea683-b6cd-49ee-9a76-61dc11f9f332.jpg"
+      ]
+    }
+  ]
+}

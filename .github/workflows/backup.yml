@@ -1,0 +1,39 @@
+name: Haftalık veri yedeği
+
+# Her Pazartesi 03:00 UTC'de çalışır; ayrıca GitHub'dan elle de tetiklenebilir.
+on:
+  schedule:
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Betik yalnızca Node'un yerleşik özelliklerini kullanır -> npm install gerekmez
+      - name: Supabase verisini yedekle
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: node scripts/backup-db.mjs
+
+      - name: Değişiklik varsa depoya işle
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add backups
+          if git diff --staged --quiet; then
+            echo "Veride değişiklik yok — commit atlandı."
+          else
+            git commit -m "chore: haftalık veri yedeği ($(date +%F))"
+            git push
+          fi

@@ -17,6 +17,10 @@ dist-ssr
 .env.*
 !.env.example
 
+# İndirilen yedek görselleri (npm run backup -- --media) depoyu şişirmesin.
+# JSON yedekleri (backups/*.json) bilinçli olarak depoda tutulur.
+backups/media/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
