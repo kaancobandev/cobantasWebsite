@@ -70,8 +70,11 @@ export default function Layout() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3.5">
-              <span className="grid h-11 w-11 place-items-center rounded-sm bg-white p-1 ring-1 ring-stone-200">
-                <img src="/cobantas-logo.jpeg" alt="Çobantaş Logo" className="h-full w-auto object-contain" />
+              {/* flex + sabit görsel boyutu: Safari'de grid+place-items-center içinde
+                  img'in height:100% değeri belirsiz kalıp gerçek boyuta düşüyor,
+                  logo kutudan taşıp aşağı sarkıyordu. overflow-hidden ek güvence. */}
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-white p-1 ring-1 ring-stone-200">
+                <img src="/cobantas-logo.jpeg" alt="Çobantaş Logo" width="36" height="36" className="h-9 w-9 object-contain" />
               </span>
               <div className="flex flex-col leading-none">
                 <span className="text-xl font-bold tracking-tight text-ink-900">ÇOBANTAŞ</span>
@@ -179,8 +182,8 @@ export default function Layout() {
           <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
             <div className="lg:col-span-2 lg:pr-10">
               <div className="mb-6 flex items-center gap-3.5">
-                <span className="grid h-11 w-11 place-items-center rounded-sm bg-white p-1">
-                  <img src="/cobantas-logo.jpeg" alt="Çobantaş Logo" className="h-full w-auto object-contain" />
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-white p-1">
+                  <img src="/cobantas-logo.jpeg" alt="Çobantaş Logo" width="36" height="36" className="h-9 w-9 object-contain" />
                 </span>
                 <div className="flex flex-col leading-none">
                   <span className="text-xl font-bold tracking-tight text-white">ÇOBANTAŞ</span>
