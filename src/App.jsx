@@ -6,6 +6,7 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 
 // Yönetim paneli yalnızca /admin'e girilince yüklenir (public paketi şişirmesin)
 const AdminPage = lazy(() => import('./pages/admin/AdminPage'));
@@ -19,8 +20,8 @@ export default function App() {
         <Route path="projeler" element={<Projects />} />
         <Route path="projeler/:id" element={<ProjectDetail />} />
         <Route path="iletisim" element={<Contact />} />
-        {/* Bilinmeyen adresler ana sayfaya düşer */}
-        <Route path="*" element={<Home />} />
+        {/* Bilinmeyen adresler: sessizce anasayfa yerine gerçek 404 sayfası */}
+        <Route path="*" element={<NotFound />} />
       </Route>
       {/* Yönetim paneli — public layout (navbar/footer) dışında */}
       <Route

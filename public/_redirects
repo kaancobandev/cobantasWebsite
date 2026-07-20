@@ -1,1 +1,17 @@
-/*    /index.html   200
+# Netlify önce GERÇEK dosyayı sunar (build'de üretilen hakkimizda.html,
+# projeler/<id>.html vb. — doğru OG etiketleriyle). Aşağıdaki kurallar yalnızca
+# o dosya yoksa devreye girer; yani güvenlik ağıdır:
+#   - yeni eklenen bir proje henüz yeniden derlenmediyse SPA yine de açar
+#   - OG üretimi bir sebeple atlanmışsa sayfalar yine çalışır
+/hakkimizda    /index.html   200
+/projeler      /index.html   200
+/projeler/*    /index.html   200
+/iletisim      /index.html   200
+
+# Yönetim paneli yalnızca tarayıcıda çizilir, statik karşılığı yok
+/admin         /index.html   200
+/admin/*       /index.html   200
+
+# Bilinçli olarak "/*" genel kuralı YOK.
+# Eşleşmeyen adresler Netlify'ın 404.html dosyasına düşer ve GERÇEK 404 döner.
+# (Eski genel kural her adrese 200 döndürdüğü için Google "soft 404" görüyordu.)

@@ -50,3 +50,38 @@ Sonra yeniden deploy et.
 
 Eklenen projeler **en son eklenen en başta** olacak şekilde Projeler sayfasında listelenir; bir projeye
 tıklayınca detay sayfası (metin + carousel) açılır.
+
+---
+
+## Otomatik yeniden derleme (önerilir)
+
+**Sorun:** Sosyal medya önizlemeleri (WhatsApp/LinkedIn paylaşımında çıkan başlık ve görsel)
+ve `sitemap.xml`, **derleme anında** üretilir. Admin panelinden yeni bir proje eklediğinde
+proje sitede hemen görünür, ancak paylaşım önizlemesi bir sonraki derlemeye kadar oluşmaz.
+
+**Çözüm:** Supabase'de veri değişince Netlify'ı otomatik yeniden derlet.
+
+### 1) Netlify'da build hook oluştur
+**Netlify → Site configuration → Build & deploy → Build hooks → Add build hook**
+- İsim: `supabase-proje-degisikligi`
+- Branch: `main`
+- Kaydet → sana bir URL verir (`https://api.netlify.com/build_hooks/xxxx`). Kopyala.
+
+> Bu URL bir paroladır: bilen herkes derleme tetikleyebilir. Bu yüzden **site koduna konmaz**,
+> yalnızca Supabase'de saklanır.
+
+### 2) Supabase'de webhook tanımla
+**Supabase → Database → Webhooks → Create a new hook**
+- Name: `netlify-rebuild`
+- Table: `projects`
+- Events: **Insert**, **Update**, **Delete** (üçünü de işaretle)
+- Type: **HTTP Request**
+- Method: **POST**
+- URL: 1. adımda kopyaladığın build hook adresi
+- Kaydet.
+
+Artık panelden proje ekleyip sildiğinde site kendiliğinden yeniden derlenir (~1 dakika)
+ve önizlemeler/sitemap güncellenir.
+
+> Kurmak istemezsen alternatif: Netlify → **Deploys → Trigger deploy** (elle, 10 saniye).
+> Ayrıca haftalık yedek işi (`.github/workflows/backup.yml`) da her Pazartesi bir derleme tetikler.

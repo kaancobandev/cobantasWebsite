@@ -124,6 +124,18 @@ try {
     written++;
   }
 
+  // 2b) 404 sayfası — Netlify eşleşmeyen adreslerde bunu GERÇEK 404 koduyla sunar.
+  //     SPA açılır ve içerideki NotFound sayfası çizilir; arama motoru 404 görür.
+  let notFound = buildPage(template, {
+    title: 'Sayfa bulunamadı | Çobantaş',
+    description: 'Aradığınız sayfa taşınmış, adı değişmiş veya hiç var olmamış olabilir.',
+    url: `${SITE}/404`,
+    image: `${SITE}/pinnacle.jpg`,
+  });
+  notFound = replaceMeta(notFound, 'name="robots"', 'noindex, follow');
+  await writeFile(path.join(DIST, '404.html'), notFound);
+  written++;
+
   // 3) Proje detay sayfaları
   let projects = [];
   try {

@@ -134,6 +134,13 @@ const tr = {
 
   detail: { gallery: 'Galeri', all: 'Tüm Projeler', contactBtn: 'İletişime Geçin', notFound: 'Proje bulunamadı', prev: 'Önceki', next: 'Sonraki', image: 'Görsel' },
 
+  notFound: {
+    title: 'Sayfa bulunamadı',
+    lead: 'Aradığınız sayfa taşınmış, adı değişmiş veya hiç var olmamış olabilir.',
+    home: 'Anasayfaya Dön',
+    projects: 'Projeleri İncele',
+  },
+
   contactPage: {
     breadcrumb: 'İletişim', eyebrow: 'İletişim', title: 'Bizimle iletişime geçin',
     lead: 'Proje danışmanlığı, teklif veya her türlü sorunuz için bize ulaşın. Aşağıdaki bilgilerden, sosyal medya hesaplarımızdan veya formu doldurarak en kısa sürede yanıt alın.',
@@ -283,6 +290,13 @@ const en = {
   },
 
   detail: { gallery: 'Gallery', all: 'All Projects', contactBtn: 'Get in Touch', notFound: 'Project not found', prev: 'Previous', next: 'Next', image: 'Image' },
+
+  notFound: {
+    title: 'Page not found',
+    lead: 'The page you are looking for may have been moved, renamed, or never existed.',
+    home: 'Back to Home',
+    projects: 'View Projects',
+  },
 
   contactPage: {
     breadcrumb: 'Contact', eyebrow: 'Contact', title: 'Get in touch with us',
