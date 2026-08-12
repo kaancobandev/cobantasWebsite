@@ -6,18 +6,67 @@ import useScrollReveal from '../hooks/useScrollReveal';
 import { useProject } from '../hooks/useProjects';
 import { useLang } from '../context/LanguageContext';
 
+// Galeri. Eskiden tek bir <img>'in src'si değiştiriliyordu: ok'a her basışta görsel
+// sıfırdan indirilmeye başlıyor, inene kadar ekran boş kalıyordu. Şimdi tüm görseller
+// üst üste tek seferde basılıyor ->
+//  * galeri ekrana yaklaşınca hepsi arka planda (lazy) indirilmeye başlar,
+//  * ok'a basıldığında görsel çoktan hazırdır, geçiş anında olur,
+//  * geri dönüldüğünde de yeniden indirilmez (DOM'dan çıkmıyorlar).
+// Henüz inmemiş bir kareye geçilirse önceki kare ekranda tutulur ve bekleme
+// göstergesi çıkar; böylece hiçbir aşamada boş/siyah kutu görünmez.
 function Carousel({ images, title }) {
   const { t } = useLang();
+  const count = images?.length || 0;
+
   const [i, setI] = useState(0);
-  if (!images || images.length === 0) return null;
-  const go = (n) => setI((prev) => (prev + n + images.length) % images.length);
+  // Ekranda duran kare. Hedef görsel henüz inmediyse bir öncekinde kalır.
+  const [visible, setVisible] = useState(0);
+  const [loaded, setLoaded] = useState(() => new Set());
+
+  if (count === 0) return null;
+
+  const show = (next) => {
+    setI(next);
+    if (loaded.has(next)) setVisible(next); // hazırsa anında geç
+  };
+  const go = (n) => show((i + n + count) % count);
+
+  const onLoad = (idx) => {
+    setLoaded((prev) => (prev.has(idx) ? prev : new Set(prev).add(idx)));
+    if (idx === i) setVisible(idx); // beklenen görsel indi -> göster
+  };
 
   return (
-    <div className="relative overflow-hidden bg-ink-900">
-      <div className="aspect-[16/9] w-full">
-        <img src={images[i]} alt={`${title} — ${t('detail.image')} ${i + 1}`} className="h-full w-full object-cover" />
+    <div className="relative select-none overflow-hidden bg-ink-900">
+      <div className="relative aspect-[16/9] w-full">
+        {images.map((src, idx) => (
+          <img
+            key={`${idx}-${src}`}
+            src={src}
+            alt={`${title} — ${t('detail.image')} ${idx + 1}`}
+            // lazy DEĞİL: galeri sayfanın altında kalıyor, lazy olsaydı indirme ancak
+            // oraya kaydırınca başlar ve ok'a basınca yine beklenirdi. Düşük öncelikle
+            // hemen indiriliyor -> kapak görseli önde, galeri arkada sessizce hazırlanır.
+            decoding="async"
+            draggable="false"
+            fetchPriority={idx === i ? 'high' : 'low'}
+            aria-hidden={idx === visible ? undefined : 'true'}
+            onLoad={() => onLoad(idx)}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ease-out ${
+              idx === visible ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        ))}
+
+        {/* Beklenen görsel henüz inmediyse (arkada önceki kare durmaya devam eder) */}
+        {!loaded.has(i) && (
+          <div className="absolute inset-0 grid place-items-center bg-ink-950/45">
+            <span className="h-9 w-9 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+          </div>
+        )}
       </div>
-      {images.length > 1 && (
+
+      {count > 1 && (
         <>
           <button onClick={() => go(-1)} aria-label={t('detail.prev')}
             className="absolute left-4 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center bg-white/85 text-ink-900 transition-colors hover:bg-bronze-600 hover:text-white">
@@ -29,7 +78,7 @@ function Carousel({ images, title }) {
           </button>
           <div className="absolute inset-x-0 bottom-4 flex justify-center gap-2">
             {images.map((_, idx) => (
-              <button key={idx} onClick={() => setI(idx)} aria-label={`${t('detail.image')} ${idx + 1}`}
+              <button key={idx} onClick={() => show(idx)} aria-label={`${t('detail.image')} ${idx + 1}`}
                 className={`h-2 w-2 rounded-full transition-colors ${idx === i ? 'bg-bronze-500' : 'bg-white/50 hover:bg-white'}`} />
             ))}
           </div>
@@ -105,7 +154,14 @@ export default function ProjectDetail() {
           {project.cover_url && (
             <div className="reveal relative overflow-hidden">
               <div className="absolute -inset-3 hidden border border-bronze-300/60 lg:block" />
-              <img src={project.cover_url} alt={project.title} className="relative aspect-[16/9] w-full object-cover" />
+              {/* Sayfanın en büyük görseli -> yüksek öncelikle çekilsin */}
+              <img
+                src={project.cover_url}
+                alt={project.title}
+                decoding="async"
+                fetchPriority="high"
+                className="relative aspect-[16/9] w-full object-cover"
+              />
             </div>
           )}
 
@@ -161,7 +217,8 @@ export default function ProjectDetail() {
           {project.images?.length > 0 && (
             <div className="reveal mt-16">
               <div className="mb-6"><Eyebrow>{t('detail.gallery')}</Eyebrow></div>
-              <Carousel images={project.images} title={project.title} />
+              {/* key: başka bir projeye geçilince galeri sıfırdan kurulsun */}
+              <Carousel key={project.id} images={project.images} title={project.title} />
             </div>
           )}
 
