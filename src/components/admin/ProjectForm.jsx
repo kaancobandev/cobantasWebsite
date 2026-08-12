@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { X, UploadCloud, ImagePlus } from 'lucide-react';
 import { supabase, MEDIA_BUCKET } from '../../lib/supabase';
+import optimizeImage from '../../lib/optimizeImage';
 
 // Proje türleri — veritabanındaki CHECK kısıtıyla birebir aynı olmalı
 // (bkz. supabase/setup.sql ve supabase/update-types.sql)
@@ -11,10 +12,12 @@ const TYPES = ['Müteahhitlik', 'Taahhüt', 'Kentsel Dönüşüm', 'Sanayi Yapı
 const STATUSES = ['Bitirilen Proje', 'Devam Eden'];
 
 async function uploadFile(file, folder) {
-  const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+  const optimized = await optimizeImage(file);
+  const ext = (optimized.name.split('.').pop() || 'jpg').toLowerCase();
   const path = `${folder}/${crypto.randomUUID()}.${ext}`;
-  const { error } = await supabase.storage.from(MEDIA_BUCKET).upload(path, file, {
-    cacheControl: '3600',
+  const { error } = await supabase.storage.from(MEDIA_BUCKET).upload(path, optimized, {
+    // Dosya adı UUID -> içerik hiç değişmez, bir yıl önbelleğe alınabilir
+    cacheControl: '31536000',
     upsert: false,
   });
   if (error) throw error;
